@@ -17,7 +17,7 @@ import { siteConfig } from "@/config/site";
 export const metadata = generateSEO({
   title: "Contact Us",
   description:
-    "Contact Lumière Beauty Studio in Columbus, OH. Call (614) 555-0147, email hello@lumierebeautystudio.com, or visit us at 2450 Grandview Avenue.",
+    "Contact Bb Salon SUITES in Columbus, OH. Call (614) 622-4624, WhatsApp +1 (380) 265-5069, or visit us at 2177 Livingston Ave.",
   path: "/contact",
 });
 
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="mt-1 block text-muted hover:text-secondary"
                 >
-                  Message us on WhatsApp
+                  {siteConfig.whatsappDisplay}
                 </a>
               </div>
 
@@ -154,7 +154,7 @@ export default function ContactPage() {
           <FadeIn className="mt-12">
             <div className="overflow-hidden rounded-2xl border border-border/50 shadow-lg">
               <iframe
-                title="Lumière Beauty Studio on Google Maps"
+                title="Bb Salon SUITES on Google Maps"
                 src={`https://maps.google.com/maps?q=${siteConfig.address.coordinates.lat},${siteConfig.address.coordinates.lng}&z=15&output=embed`}
                 width="100%"
                 height="400"

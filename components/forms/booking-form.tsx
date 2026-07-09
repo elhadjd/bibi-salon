@@ -71,7 +71,7 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
         <CheckCircle className="mx-auto h-16 w-16 text-secondary" />
         <h3 className="mt-6 text-2xl font-medium text-primary">Appointment Request Received!</h3>
         <p className="mt-3 text-muted">
-          Thank you for booking with Lumière Beauty Studio. We&apos;ll confirm your appointment
+          Thank you for booking with Bb Salon SUITES. We&apos;ll confirm your appointment
           within 2 hours via email and text message.
         </p>
         <p className="mt-2 text-sm text-muted">

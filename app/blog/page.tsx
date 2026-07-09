@@ -12,7 +12,7 @@ import { blogPosts } from "@/constants/blog";
 export const metadata = generateSEO({
   title: "Beauty Blog",
   description:
-    "Beauty tips, hair care advice, salon news, and promotions from Lumière Beauty Studio in Columbus, OH. Expert insights from our team of professionals.",
+    "Beauty tips, braiding advice, salon news, and promotions from Bb Salon SUITES in Columbus, OH.",
   path: "/blog",
 });
 
@@ -27,7 +27,7 @@ export default function BlogPage() {
       />
       <PageHero
         eyebrow="Beauty Insights"
-        title="The Lumière Blog"
+        title="The Bb Salon Blog"
         description="Expert tips, trends, and news from Columbus's premier beauty destination."
       />
 

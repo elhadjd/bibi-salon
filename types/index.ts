@@ -50,12 +50,11 @@ export interface GalleryImage {
 
 export type GalleryCategory =
   | "all"
-  | "hair"
-  | "color"
   | "braids"
-  | "nails"
+  | "locs"
+  | "extensions"
   | "lashes"
-  | "barber"
+  | "makeup"
   | "before-after";
 
 export interface BlogPost {
@@ -75,6 +74,7 @@ export interface SalonSuite {
   name: string;
   size: string;
   price: number;
+  pricePeriod: "week" | "month";
   available: boolean;
   amenities: string[];
   image: string;

@@ -14,7 +14,7 @@ import { generalFAQs, suiteFAQs } from "@/constants/salon-suites";
 export const metadata = generateSEO({
   title: "FAQ",
   description:
-    "Frequently asked questions about Lumière Beauty Studio in Columbus, OH — appointments, services, salon suite rentals, parking, and policies.",
+    "Frequently asked questions about Bb Salon SUITES in Columbus, OH — braiding services, appointments, salon suite rentals, and policies.",
   path: "/faq",
 });
 

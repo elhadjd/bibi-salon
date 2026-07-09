@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#111111"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#grad)" opacity="0.4"/>
+  <rect width="1200" height="630" fill="#000000"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#grad)" opacity="0.5"/>
   <defs>
     <radialGradient id="grad" cx="80%" cy="20%" r="60%">
-      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="0%" stop-color="#E6007E"/>
       <stop offset="100%" stop-color="transparent"/>
     </radialGradient>
   </defs>
-  <text x="600" y="280" text-anchor="middle" font-family="Georgia, serif" font-size="96" font-weight="500" fill="#FFFFFF">Lumière</text>
-  <text x="600" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" letter-spacing="12" fill="#D4AF37">BEAUTY STUDIO</text>
-  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF" opacity="0.7">Columbus, Ohio&apos;s Premier Luxury Beauty Destination</text>
+  <text x="600" y="260" text-anchor="middle" font-family="Georgia, serif" font-size="72" font-weight="500" fill="#E6007E">Bb Salon</text>
+  <text x="600" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" letter-spacing="8" fill="#D4AF37">SUITES</text>
+  <text x="600" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#FFFFFF" opacity="0.8">Hair Braiding &amp; Salon Suites for Rent — Columbus, OH</text>
+  <text x="600" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#D4AF37">$150/week · Services from $100</text>
 </svg>

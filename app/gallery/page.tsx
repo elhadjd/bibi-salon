@@ -7,7 +7,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Gallery",
   description:
-    "Browse our portfolio of stunning hair transformations, color work, nail art, lash extensions, and barber services at Lumière Beauty Studio in Columbus, OH.",
+    "Browse our portfolio of stunning braids, locs, lash extensions, and makeup at Bb Salon SUITES in Columbus, OH.",
   path: "/gallery",
 });
 

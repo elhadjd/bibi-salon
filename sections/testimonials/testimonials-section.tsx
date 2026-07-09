@@ -21,7 +21,7 @@ export function TestimonialsSection({ limit = 3, showAll = false }: Testimonials
           <SectionHeading
             eyebrow="Client Love"
             title="What Our Clients Say"
-            description="Join thousands of satisfied clients who trust Lumière for their beauty needs."
+            description="See what our clients say about their braiding and beauty experiences at Bb Salon SUITES."
           />
         </FadeIn>
 

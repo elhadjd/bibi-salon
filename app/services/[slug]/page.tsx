@@ -67,7 +67,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <Image
                   src={service.image}
-                  alt={`${service.name} at Lumière Beauty Studio`}
+                  alt={`${service.name} at Bb Salon SUITES`}
                   fill
                   className="object-cover"
                   priority

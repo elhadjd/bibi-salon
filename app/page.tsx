@@ -22,12 +22,12 @@ export default function HomePage() {
       <LocationSection />
       <CTASection />
       <CTASection
-        title="Beauty Professional? Rent Your Dream Suite"
-        description="Join Columbus's most prestigious salon suite community. Flexible terms, premium amenities, and a thriving professional network await."
+        title="Beauty Professional? Rent a Suite for $150/Week"
+        description="All materials & Wi-Fi included. Only 7 minutes from downtown Columbus. Call Bibiche to schedule a tour!"
         primaryLabel="Explore Salon Suites"
         primaryHref="/salon-suites"
-        secondaryLabel="Schedule a Tour"
-        secondaryHref="/contact"
+        secondaryLabel="Call (614) 622-4624"
+        secondaryHref="tel:+16146224624"
         variant="gold"
       />
     </>

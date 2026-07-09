@@ -1,31 +1,32 @@
 import { Award, Heart, Sparkles, Shield } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/animations/motion";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { siteConfig } from "@/config/site";
 
 const reasons = [
   {
     icon: Award,
-    title: "Award-Winning Artists",
+    title: "Expert Braiders",
     description:
-      "Our team includes nationally recognized stylists and colorists trained at the industry's top academies.",
+      "Our team specializes in knotless braids, box braids, locs, twists, and all protective styles with years of experience.",
   },
   {
     icon: Sparkles,
-    title: "Premium Products",
+    title: "Affordable Pricing",
     description:
-      "We use only professional-grade, luxury products from brands like Olaplex, Redken, and Dermalogica.",
+      `Services start at just $${siteConfig.servicesStartAt}. New clients get ${siteConfig.promotion}!`,
   },
   {
     icon: Heart,
-    title: "Personalized Experience",
+    title: "Scalp-Friendly Techniques",
     description:
-      "Every visit begins with a consultation to understand your goals, lifestyle, and unique beauty.",
+      "We prioritize your hair health with gentle braiding methods that protect your natural hair and scalp.",
   },
   {
     icon: Shield,
-    title: "Hygiene Excellence",
+    title: "Clean & Professional",
     description:
-      "Rigorous sanitation protocols and HEPA filtration ensure your safety and peace of mind.",
+      "A beautiful pink and gold salon environment with strict hygiene standards for your safety and comfort.",
   },
 ];
 
@@ -35,9 +36,9 @@ export function WhyChooseUsSection() {
       <div className="container-wide">
         <FadeIn>
           <SectionHeading
-            eyebrow="The Lumière Difference"
+            eyebrow="The Bb Salon Difference"
             title="Why Clients Choose Us"
-            description="More than a salon — a sanctuary where expertise, luxury, and genuine care converge."
+            description="Columbus's trusted destination for braiding, beauty services, and salon suite rentals."
           />
         </FadeIn>
 
@@ -45,8 +46,8 @@ export function WhyChooseUsSection() {
           {reasons.map((reason) => (
             <StaggerItem key={reason.title}>
               <div className="rounded-2xl border border-border/50 bg-background p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/10">
-                  <reason.icon className="h-7 w-7 text-secondary" />
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10">
+                  <reason.icon className="h-7 w-7 text-accent" />
                 </div>
                 <h3 className="mt-6 text-lg font-medium text-primary">{reason.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{reason.description}</p>

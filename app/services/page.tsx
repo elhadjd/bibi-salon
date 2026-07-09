@@ -8,7 +8,7 @@ import { services } from "@/constants/services";
 export const metadata = generateSEO({
   title: "Beauty Services",
   description:
-    "Explore luxury beauty services at Lumière Beauty Studio in Columbus, OH — hair styling, color, balayage, braids, extensions, barber, nails, lashes, and facials.",
+    "Explore hair braiding and beauty services at Bb Salon SUITES in Columbus, OH — knotless braids, box braids, locs, extensions, lashes, eyebrows, and makeup from $100.",
   path: "/services",
 });
 
