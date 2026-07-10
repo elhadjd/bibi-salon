@@ -1,7 +1,8 @@
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Providers } from "@/providers/query-provider";
 import { MainLayout } from "@/components/layout/main-layout";
-import { LocalBusinessSchema } from "@/components/seo/schema";
+import { LocalBusinessSchema, WebSiteSchema } from "@/components/seo/schema";
+import { homePageDescription } from "@/config/keywords";
 import { generateSEO } from "@/lib/seo";
 import "@/styles/globals.css";
 
@@ -19,7 +20,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata = {
-  ...generateSEO(),
+  ...generateSEO({
+    description: homePageDescription,
+  }),
   icons: {
     icon: "/images/logo.svg",
     apple: "/images/logo.svg",
@@ -35,6 +38,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <head>
         <LocalBusinessSchema />
+        <WebSiteSchema />
       </head>
       <body className="min-h-screen font-sans">
         <a

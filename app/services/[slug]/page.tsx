@@ -26,10 +26,11 @@ export async function generateMetadata({ params }: ServicePageProps) {
   if (!service) return {};
 
   return generateSEO({
-    title: service.name,
-    description: service.description,
+    title: `${service.name} Columbus OH`,
+    description: `${service.description} Book ${service.name.toLowerCase()} at Bb Salon SUITES in Columbus, Ohio. Starting at $${service.startingPrice}. Open daily 8AM-9:30PM.`,
     path: `/services/${service.slug}`,
     image: service.image,
+    keywords: `${service.name} Columbus Ohio, ${service.name} near me, African hair braiding Columbus, Black hair salon Columbus OH`,
   });
 }
 

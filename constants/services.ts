@@ -1,11 +1,11 @@
 import { Service } from "@/types";
 
-const braidImage = "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&q=80";
-const locsImage = "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80";
-const extensionsImage = "https://images.unsplash.com/photo-1492106087820-71f1a00d2d11?w=800&q=80";
-const lashesImage = "https://images.unsplash.com/photo-1583001939226-6b6d8f379f54?w=800&q=80";
-const browsImage = "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800&q=80";
-const makeupImage = "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80";
+const braidImage = "/images/gallery-braids-box.jpg";
+const knotlessImage = "/images/gallery-knotless.jpg";
+const locsImage = "/images/gallery-locs.jpg";
+const cornrowsImage = "/images/gallery-cornrows.jpg";
+const wavesImage = "/images/gallery-waves.jpg";
+const glamImage = "/images/gallery-glam-makeup.jpg";
 
 export const services: Service[] = [
   {
@@ -17,7 +17,7 @@ export const services: Service[] = [
       "Our signature knotless braids reduce tension on the scalp while delivering a seamless, natural look. Perfect for protective styling with less discomfort and beautiful results that last weeks.",
     duration: "4–8 hours",
     startingPrice: 150,
-    image: braidImage,
+    image: knotlessImage,
     featured: true,
     benefits: ["Scalp-friendly technique", "Natural finish", "Long-lasting style"],
   },
@@ -56,7 +56,7 @@ export const services: Service[] = [
       "From classic straight-backs to elaborate tribal and feed-in patterns, our braiders create precise cornrows that protect your hair while showcasing artistry and culture.",
     duration: "1–4 hours",
     startingPrice: 100,
-    image: braidImage,
+    image: cornrowsImage,
     featured: true,
     benefits: ["Creative patterns", "Feed-in technique", "Quick install options"],
   },
@@ -82,7 +82,7 @@ export const services: Service[] = [
       "Twists offer a softer alternative to braids with beautiful movement and texture. Choose from Senegalese, passion, or spring twists for a look that suits your style.",
     duration: "3–7 hours",
     startingPrice: 130,
-    image: braidImage,
+    image: knotlessImage,
     featured: true,
     benefits: ["Multiple twist types", "Natural movement", "Low maintenance"],
   },
@@ -95,7 +95,7 @@ export const services: Service[] = [
       "Transform your look with high-quality human hair extensions. We offer various methods and textures to match your natural hair for seamless, beautiful results.",
     duration: "2–5 hours",
     startingPrice: 150,
-    image: extensionsImage,
+    image: wavesImage,
     featured: true,
     benefits: ["Color matching", "Premium hair", "Multiple methods"],
   },
@@ -108,7 +108,7 @@ export const services: Service[] = [
       "Our sew-in specialists create flawless installations with proper braiding foundation and invisible weft placement. Leave with full, flowing hair that looks and feels natural.",
     duration: "3–6 hours",
     startingPrice: 140,
-    image: extensionsImage,
+    image: wavesImage,
     featured: true,
     benefits: ["Secure installation", "Natural blend", "Versatile styling"],
   },
@@ -121,7 +121,7 @@ export const services: Service[] = [
       "Complete your install with a perfectly blended closure or frontal. We customize the hairline, bleach knots, and style for an undetectable, salon-quality finish.",
     duration: "2–4 hours",
     startingPrice: 100,
-    image: extensionsImage,
+    image: wavesImage,
     featured: false,
     benefits: ["Natural hairline", "Custom parting", "Bleached knots"],
   },
@@ -134,7 +134,7 @@ export const services: Service[] = [
       "Frame your face with beautifully shaped brows. Our artists sculpt, wax, and style your eyebrows to complement your features for a polished, defined look.",
     duration: "20–45 min",
     startingPrice: 100,
-    image: browsImage,
+    image: glamImage,
     featured: true,
     benefits: ["Custom shaping", "Wax & tweeze", "Brow styling"],
   },
@@ -147,7 +147,7 @@ export const services: Service[] = [
       "Wake up gorgeous with our lash services. From classic to volume extensions and lash lifts, every set is customized to enhance your natural eye shape.",
     duration: "1.5–3 hours",
     startingPrice: 100,
-    image: lashesImage,
+    image: glamImage,
     featured: true,
     benefits: ["Custom lash mapping", "Volume & classic sets", "Aftercare guidance"],
   },
@@ -160,7 +160,7 @@ export const services: Service[] = [
       "Look your absolute best for any occasion. Our makeup artists create flawless looks from soft glam to full beat — perfect for weddings, parties, and special events.",
     duration: "45–90 min",
     startingPrice: 100,
-    image: makeupImage,
+    image: glamImage,
     featured: true,
     benefits: ["Event-ready looks", "Long-lasting products", "Skin-tone matching"],
   },

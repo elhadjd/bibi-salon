@@ -32,10 +32,11 @@ import { formatWeeklyPrice } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generateSEO({
-  title: "Salon Suites for Rent",
+  title: "Salon Suites for Rent Columbus OH - $150/Week",
   description:
-    "Rent a luxury salon suite at Bb Salon SUITES in Columbus, OH for just $150/week. All materials, Wi-Fi, shampoo sink & AC included. Only 7 min from downtown. Call (614) 622-4624.",
+    "Rent a luxury salon suite in Columbus Ohio for $150/week. All materials, Wi-Fi & shampoo sink included. Perfect for braiders, stylists & lash artists. Call (614) 622-4624.",
   path: "/salon-suites",
+  keywords: "salon suite for rent Columbus Ohio, booth rental salon Columbus, salon suites Livingston Ave, beauty suite rental Columbus OH",
 });
 
 const iconMap = {

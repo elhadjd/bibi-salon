@@ -8,7 +8,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Bibiche founded Bb Salon SUITES with a passion for braiding artistry and empowering beauty professionals. Her expert technique and warm hospitality have made the salon a trusted destination in Columbus.",
     experience: "10+ years",
     specialties: ["Knotless Braids", "Box Braids", "Cornrows", "Sew-Ins"],
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+    image: "/images/gallery-braids-box.jpg",
     social: { instagram: "https://instagram.com/bbsalonsuites" },
   },
   {
@@ -18,7 +18,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Aisha specializes in knotless braids, boho styles, and faux locs. Known for her speed and precision, she creates stunning protective styles that last.",
     experience: "8+ years",
     specialties: ["Knotless Braids", "Boho Braids", "Faux Locs"],
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+    image: "/images/gallery-knotless.jpg",
     social: { instagram: "https://instagram.com" },
   },
   {
@@ -28,7 +28,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Emily delivers flawless lash extensions and perfectly shaped brows. Her attention to detail ensures every client leaves feeling confident and beautiful.",
     experience: "6+ years",
     specialties: ["Lash Extensions", "Lash Lifts", "Eyebrow Shaping"],
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80",
+    image: "/images/gallery-glam-makeup.jpg",
     social: { instagram: "https://instagram.com" },
   },
   {
@@ -38,7 +38,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Maria creates stunning makeup looks for weddings, events, and photoshoots. From soft glam to full beat, she makes every client camera-ready.",
     experience: "7+ years",
     specialties: ["Bridal Makeup", "Glam Looks", "Special Events"],
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
+    image: "/images/gallery-waves.jpg",
     social: { instagram: "https://instagram.com" },
   },
 ];

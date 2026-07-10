@@ -18,8 +18,8 @@ export function Footer() {
       <div className="container-wide section-padding">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="inline-block rounded-xl bg-white/95 px-4 py-2">
-              <Logo size="md" showLink={false} />
+            <div className="inline-block w-full max-w-xs rounded-xl bg-white px-4 py-3 sm:max-w-sm sm:px-5 sm:py-4">
+              <Logo size="lg" showLink={false} />
             </div>
             <p className="mt-2 text-xs italic text-secondary">{siteConfig.tagline}</p>
             <p className="mt-4 text-sm leading-relaxed text-white/60">

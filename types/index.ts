@@ -88,7 +88,6 @@ export interface FAQItem {
 
 export interface BookingFormData {
   service: string;
-  professional: string;
   date: string;
   time: string;
   firstName: string;
