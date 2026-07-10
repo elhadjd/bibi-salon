@@ -75,7 +75,7 @@ export default function AboutPage() {
                   businesses.
                 </p>
                 <p>
-                  Located at 2177 Livingston Ave — just 7 minutes from downtown Columbus — we offer
+                  Located at 2177 E. Livingston Ave — just 7 minutes from downtown Columbus — we offer
                   expert hair braiding, lashes, eyebrows, and makeup services starting at $100,
                   plus luxury salon suites for rent at only $150 per week with all materials and
                   Wi-Fi included.

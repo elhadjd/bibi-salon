@@ -134,13 +134,13 @@ export const generalFAQs: FAQItem[] = [
   {
     question: "What are your hours?",
     answer:
-      "We are open Monday through Saturday, 8:00 AM to 7:00 PM. We are closed on Sundays.",
+      "We are open every day from 8:00 AM to 9:30 PM, including Sundays. Walk-ins welcome based on availability.",
     category: "general",
   },
   {
     question: "Where are you located?",
     answer:
-      "We are located at 2177 Livingston Ave, Columbus, OH 43209 — only 7 minutes from downtown Columbus with free on-site parking.",
+      "We are located at 2177 E. Livingston Ave, Columbus, OH 43209 — only 7 minutes from downtown Columbus with free on-site parking.",
     category: "general",
   },
   {

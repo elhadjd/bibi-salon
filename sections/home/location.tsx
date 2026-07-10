@@ -19,7 +19,7 @@ export function LocationSection() {
               Find Us on Livingston Ave
             </h2>
             <p className="mt-4 text-lg text-muted">
-              Located at 2177 Livingston Ave in Columbus — only 7 minutes from downtown
+              Located at 2177 E. Livingston Ave in Columbus — only 7 minutes from downtown
               with free on-site parking.
             </p>
 

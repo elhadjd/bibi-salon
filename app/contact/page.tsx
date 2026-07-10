@@ -17,7 +17,7 @@ import { siteConfig } from "@/config/site";
 export const metadata = generateSEO({
   title: "Contact Us",
   description:
-    "Contact Bb Salon SUITES in Columbus, OH. Call (614) 622-4624, WhatsApp +1 (380) 265-5069, or visit us at 2177 Livingston Ave.",
+    "Contact Bb Salon SUITES in Columbus, OH. Call (614) 622-4624, WhatsApp +1 (380) 265-5069, email bibichetg@gmail.com, or visit 2177 E. Livingston Ave.",
   path: "/contact",
 });
 

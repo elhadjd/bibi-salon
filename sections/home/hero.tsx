@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/ui/counter";
 import { Badge } from "@/components/ui/badge";
+import { Logo } from "@/components/ui/logo";
+import { brandImages } from "@/constants/images";
 import { siteConfig } from "@/config/site";
 
 export function HeroSection() {
@@ -14,65 +16,89 @@ export function HeroSection() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden" aria-label="Hero">
       <Image
-        src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=1920&q=85"
-        alt="Hair braiding at Bb Salon SUITES in Columbus, Ohio"
+        src={brandImages.banner}
+        alt={brandImages.bannerAlt}
         fill
         priority
         className="object-cover"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-accent/30" />
+      <Image
+        src={brandImages.heroPortrait}
+        alt={brandImages.heroPortraitAlt}
+        fill
+        priority
+        className="object-cover object-top opacity-40 mix-blend-overlay"
+        sizes="100vw"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-accent/40" />
 
-      <div className="container-wide relative z-10 pt-20">
-        <div className="max-w-3xl">
-          <Badge variant="accent" className="mb-4 bg-accent text-white">
-            {siteConfig.promotion}
-          </Badge>
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-secondary">
-            Hair Braiding & Salon Suites — Columbus, OH
-          </p>
-          <h1 className="text-4xl font-medium leading-tight text-white sm:text-5xl lg:text-7xl text-balance">
-            <span className="text-accent">Bb</span> Salon{" "}
-            <span className="text-secondary">SUITES</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 text-balance">
-            Expert braiding, lashes, eyebrows & makeup starting at $100. Luxury salon suites
-            for rent at just $150/week — all materials & Wi-Fi included. Only 7 minutes
-            from downtown Columbus.
-          </p>
+      <div className="container-wide relative z-10 pt-24 pb-16">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <Badge variant="accent" className="mb-6 bg-accent text-white shadow-lg">
+              {siteConfig.promotion}
+            </Badge>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Button variant="secondary" size="lg" asChild>
-              <Link href="/book">
-                Book Appointment
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white/30 text-white hover:bg-white hover:text-primary"
-              asChild
-            >
-              <a href={`tel:${siteConfig.phoneRaw}`}>
-                <Phone className="h-5 w-5" />
-                {siteConfig.phone}
-              </a>
-            </Button>
-            <Button
-              variant="accent"
-              size="lg"
-              asChild
-            >
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-5 w-5" />
-                WhatsApp
-              </a>
-            </Button>
+            <div className="mb-6 rounded-2xl bg-white/95 p-4 shadow-2xl backdrop-blur-sm inline-block">
+              <Logo size="lg" showLink={false} />
+            </div>
+
+            <p className="mb-2 text-lg font-medium italic text-secondary">
+              {siteConfig.tagline}
+            </p>
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-white/80">
+              {siteConfig.subtitle} · Columbus, OH
+            </p>
+
+            <p className="max-w-xl text-lg leading-relaxed text-white/90 text-balance">
+              Expert braiding, lashes, eyebrows &amp; makeup from ${siteConfig.servicesStartAt}.
+              Luxury salon suites for rent at ${siteConfig.suitePriceWeekly}/week — all materials
+              &amp; Wi-Fi included. {siteConfig.hoursSummary}.
+            </p>
+
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <Button variant="secondary" size="lg" asChild>
+                <Link href="/book">
+                  Book Appointment
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/40 bg-white/10 text-white hover:bg-white hover:text-primary"
+                asChild
+              >
+                <a href={`tel:${siteConfig.phoneRaw}`}>
+                  <Phone className="h-5 w-5" />
+                  {siteConfig.phone}
+                </a>
+              </Button>
+              <Button variant="accent" size="lg" asChild>
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="h-5 w-5" />
+                  WhatsApp
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          <div className="relative hidden lg:block">
+            <div className="relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-3xl border-4 border-secondary/60 shadow-2xl">
+              <Image
+                src={brandImages.heroPortrait}
+                alt={brandImages.heroPortraitAlt}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 0vw, 400px"
+                priority
+              />
+            </div>
           </div>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 gap-8 rounded-2xl border border-accent/20 bg-white/5 p-8 backdrop-blur-sm sm:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 gap-6 rounded-2xl border border-secondary/30 bg-black/30 p-6 backdrop-blur-md sm:grid-cols-4 lg:mt-20 lg:p-8 [&_p]:text-white [&_.text-primary]:text-white">
           <Counter end={siteConfig.stats.yearsInBusiness} suffix="+" label="Years of Excellence" />
           <Counter end={siteConfig.stats.happyClients} suffix="+" label="Happy Clients" />
           <Counter end={siteConfig.stats.professionals} suffix="+" label="Professionals" />
