@@ -21,7 +21,8 @@ const cormorant = Cormorant_Garamond({
 export const metadata = {
   ...generateSEO(),
   icons: {
-    icon: "/favicon.svg",
+    icon: "/images/logo.svg",
+    apple: "/images/logo.svg",
   },
 };
 

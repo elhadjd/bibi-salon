@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
 import { navigation, siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -38,24 +39,14 @@ export function Navbar() {
     >
       <nav className="container-wide" aria-label="Main navigation">
         <div className="flex h-20 items-center justify-between">
-          <Link href="/" className="group flex flex-col" aria-label={`${siteConfig.name} home`}>
-            <span
-              className={cn(
-                "font-display text-2xl font-medium tracking-wide transition-colors",
-                isScrolled ? "text-primary" : "text-white"
-              )}
-            >
-              Bb Salon
-            </span>
-            <span
-              className={cn(
-                "text-[10px] uppercase tracking-[0.3em] transition-colors",
-                isScrolled ? "text-accent" : "text-accent"
-              )}
-            >
-              SUITES & Hair Braiding
-            </span>
-          </Link>
+          <div
+            className={cn(
+              "rounded-xl transition-all",
+              !isScrolled && isHome && "bg-white/95 px-3 py-1.5 shadow-md"
+            )}
+          >
+            <Logo size="sm" showLink />
+          </div>
 
           <div className="hidden items-center gap-1 lg:flex">
             {navigation.main.map((item) =>

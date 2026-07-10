@@ -7,6 +7,7 @@ import {
   Clock,
 } from "lucide-react";
 import Link from "next/link";
+import { Logo } from "@/components/ui/logo";
 import { navigation, siteConfig } from "@/config/site";
 
 export function Footer() {
@@ -17,18 +18,13 @@ export function Footer() {
       <div className="container-wide section-padding">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="inline-block">
-              <span className="font-display text-3xl font-medium">
-                <span className="text-accent">Bb</span> Salon{" "}
-                <span className="text-secondary">SUITES</span>
-              </span>
-              <p className="mt-1 text-xs uppercase tracking-[0.3em] text-accent">
-                Hair Braiding
-              </p>
-            </Link>
+            <div className="inline-block rounded-xl bg-white/95 px-4 py-2">
+              <Logo size="md" showLink={false} />
+            </div>
+            <p className="mt-2 text-xs italic text-secondary">{siteConfig.tagline}</p>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               Columbus&apos;s destination for expert hair braiding and luxury salon suites
-              for rent. Only 7 minutes from downtown.
+              for rent. {siteConfig.hoursSummary}.
             </p>
             <div className="mt-6 flex gap-4">
               <a
@@ -122,7 +118,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-secondary" />
-                <span>Mon–Sat: 8AM–7PM<br />Sun: Closed</span>
+                <span>{siteConfig.hoursSummary}</span>
               </li>
             </ul>
           </div>

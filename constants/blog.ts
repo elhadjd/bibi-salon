@@ -112,7 +112,7 @@ Mention the "$20 OFF" promotion when booking your appointment. Call (614) 622-46
 
 ## Location
 
-2177 Livingston Ave, Columbus, OH 43209 — only 7 minutes from downtown. Free parking available.
+2177 E. Livingston Ave, Columbus, OH 43209 — only 7 minutes from downtown. Free parking available.
 
 We can't wait to see you!`,
     image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80",
