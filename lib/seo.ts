@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import { allKeywords } from "@/config/keywords";
 
 type SEOProps = {
   title?: string;
@@ -8,15 +9,17 @@ type SEOProps = {
   image?: string;
   noIndex?: boolean;
   type?: "website" | "article";
+  keywords?: string;
 };
 
 export function generateSEO({
   title,
   description = siteConfig.description,
   path = "",
-  image = "/og-image.svg",
+  image = "/images/hero-portrait.jpg",
   noIndex = false,
   type = "website",
+  keywords = allKeywords,
 }: SEOProps = {}): Metadata {
   const pageTitle = title
     ? `${title} | ${siteConfig.name}`
@@ -27,6 +30,7 @@ export function generateSEO({
   return {
     title: pageTitle,
     description,
+    keywords,
     metadataBase: new URL(siteConfig.url),
     alternates: {
       canonical: url,
@@ -55,12 +59,23 @@ export function generateSEO({
     },
     robots: noIndex
       ? { index: false, follow: false }
-      : { index: true, follow: true },
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
     other: {
       "geo.region": "US-OH",
       "geo.placename": "Columbus",
       "geo.position": `${siteConfig.address.coordinates.lat};${siteConfig.address.coordinates.lng}`,
       ICBM: `${siteConfig.address.coordinates.lat}, ${siteConfig.address.coordinates.lng}`,
     },
+    category: "Beauty Salon",
   };
 }

@@ -1,17 +1,36 @@
 import { siteConfig } from "@/config/site";
+import { seoKeywords } from "@/config/keywords";
 import { services } from "@/constants/services";
+
+const dayMap: Record<string, string> = {
+  Monday: "https://schema.org/Monday",
+  Tuesday: "https://schema.org/Tuesday",
+  Wednesday: "https://schema.org/Wednesday",
+  Thursday: "https://schema.org/Thursday",
+  Friday: "https://schema.org/Friday",
+  Saturday: "https://schema.org/Saturday",
+  Sunday: "https://schema.org/Sunday",
+};
 
 export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BeautySalon",
+    "@id": `${siteConfig.url}/#salon`,
     name: siteConfig.name,
+    alternateName: ["Bb Salon", "B.b. Salon SUITES", "Bb Salon SUITES Columbus"],
     description: siteConfig.description,
     url: siteConfig.url,
     telephone: siteConfig.phoneRaw,
     email: siteConfig.email,
-    image: `${siteConfig.url}/og-image.svg`,
+    image: [
+      `${siteConfig.url}/images/hero-portrait.jpg`,
+      `${siteConfig.url}/images/logo.svg`,
+    ],
+    logo: `${siteConfig.url}/images/logo.svg`,
     priceRange: "$$",
+    currenciesAccepted: "USD",
+    paymentAccepted: "Cash, Credit Card, Debit Card",
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.address.street,
@@ -25,13 +44,19 @@ export function LocalBusinessSchema() {
       latitude: siteConfig.address.coordinates.lat,
       longitude: siteConfig.address.coordinates.lng,
     },
+    areaServed: {
+      "@type": "City",
+      name: "Columbus",
+      containedInPlace: { "@type": "State", name: "Ohio" },
+    },
     openingHoursSpecification: siteConfig.hours.map((h) => ({
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: h.day,
-      opens: h.hours.split(" – ")[0],
-      closes: h.hours.split(" – ")[1],
+      dayOfWeek: dayMap[h.day],
+      opens: "08:00",
+      closes: "21:30",
     })),
     sameAs: Object.values(siteConfig.social),
+    knowsAbout: seoKeywords.services,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.9",
@@ -40,16 +65,44 @@ export function LocalBusinessSchema() {
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Beauty Services",
+      name: "Hair Braiding & Beauty Services",
       itemListElement: services.map((service) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
           name: service.name,
           description: service.description,
+          provider: { "@id": `${siteConfig.url}/#salon` },
+          areaServed: "Columbus, Ohio",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          price: service.startingPrice,
+          priceCurrency: "USD",
+          minPrice: service.startingPrice,
         },
       })),
     },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function WebSiteSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    publisher: { "@id": `${siteConfig.url}/#salon` },
+    inLanguage: "en-US",
   };
 
   return (
@@ -133,7 +186,7 @@ export function ArticleSchema({
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/og-image.svg`,
+        url: `${siteConfig.url}/images/logo.svg`,
       },
     },
     mainEntityOfPage: {

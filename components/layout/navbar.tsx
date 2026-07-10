@@ -38,14 +38,14 @@ export function Navbar() {
       )}
     >
       <nav className="container-wide" aria-label="Main navigation">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-24 items-center justify-between sm:h-28">
           <div
             className={cn(
-              "rounded-xl transition-all",
-              !isScrolled && isHome && "bg-white/95 px-3 py-1.5 shadow-md"
+              "shrink-0 rounded-xl transition-all",
+              !isScrolled && isHome ? "bg-white px-3 py-2 shadow-md sm:px-4 sm:py-2.5" : "py-1"
             )}
           >
-            <Logo size="sm" showLink />
+            <Logo size="md" showLink />
           </div>
 
           <div className="hidden items-center gap-1 lg:flex">

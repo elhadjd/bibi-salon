@@ -1,3 +1,6 @@
+import { Metadata } from "next";
+import { homePageDescription, homePageTitle } from "@/config/keywords";
+import { generateSEO } from "@/lib/seo";
 import { HeroSection } from "@/sections/home/hero";
 import { FeaturedServicesSection } from "@/sections/services/featured-services";
 import { GallerySection } from "@/sections/gallery/gallery-section";
@@ -5,8 +8,18 @@ import { TestimonialsSection } from "@/sections/testimonials/testimonials-sectio
 import { TeamSection } from "@/sections/team/team-section";
 import { WhyChooseUsSection } from "@/sections/home/why-choose-us";
 import { LocationSection } from "@/sections/home/location";
+import { SEOContentSection } from "@/sections/home/seo-content";
 import { CTASection } from "@/sections/shared/cta-section";
 import { getFeaturedServices } from "@/constants/services";
+
+export const metadata: Metadata = {
+  ...generateSEO({
+    description: homePageDescription,
+    path: "/",
+  }),
+  title: homePageTitle,
+  description: homePageDescription,
+};
 
 export default function HomePage() {
   const featuredServices = getFeaturedServices();
@@ -19,6 +32,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <TeamSection limit={3} />
       <WhyChooseUsSection />
+      <SEOContentSection />
       <LocationSection />
       <CTASection />
       <CTASection

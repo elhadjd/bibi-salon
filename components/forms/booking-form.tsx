@@ -17,11 +17,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "@/constants/services";
-import { teamMembers } from "@/constants/team";
 
 const bookingSchema = z.object({
   service: z.string().min(1, "Please select a service"),
-  professional: z.string().min(1, "Please select a professional"),
   date: z.string().min(1, "Please select a date"),
   time: z.string().min(1, "Please select a time"),
   firstName: z.string().min(2, "First name is required"),
@@ -34,17 +32,14 @@ const bookingSchema = z.object({
 type BookingFormValues = z.infer<typeof bookingSchema>;
 
 const timeSlots = [
-  "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
-  "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM",
-  "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM",
-  "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM",
+  "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM",
+  "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM",
+  "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM",
+  "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM",
+  "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM",
 ];
 
-interface BookingFormProps {
-  defaultProfessional?: string;
-}
-
-export function BookingForm({ defaultProfessional }: BookingFormProps) {
+export function BookingForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const {
     register,
@@ -54,9 +49,6 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
-    defaultValues: {
-      professional: defaultProfessional || "",
-    },
   });
 
   const onSubmit = async (data: BookingFormValues) => {
@@ -67,15 +59,12 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
 
   if (isSubmitted) {
     return (
-      <div className="rounded-2xl border border-border/50 bg-white p-12 text-center shadow-sm">
-        <CheckCircle className="mx-auto h-16 w-16 text-secondary" />
-        <h3 className="mt-6 text-2xl font-medium text-primary">Appointment Request Received!</h3>
-        <p className="mt-3 text-muted">
+      <div className="rounded-2xl border border-border/50 bg-white p-8 text-center shadow-sm sm:p-12">
+        <CheckCircle className="mx-auto h-14 w-14 text-secondary sm:h-16 sm:w-16" />
+        <h3 className="mt-6 text-xl font-medium text-primary sm:text-2xl">Appointment Request Received!</h3>
+        <p className="mt-3 text-sm text-muted sm:text-base">
           Thank you for booking with Bb Salon SUITES. We&apos;ll confirm your appointment
           within 2 hours via email and text message.
-        </p>
-        <p className="mt-2 text-sm text-muted">
-          A calendar invitation will be sent once your appointment is confirmed.
         </p>
       </div>
     );
@@ -86,28 +75,28 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-2xl border border-border/50 bg-white p-8 shadow-sm"
+      className="rounded-2xl border border-border/50 bg-white p-5 shadow-sm sm:p-8"
       noValidate
     >
-      <div className="mb-8 flex items-center gap-3">
-        <Calendar className="h-6 w-6 text-secondary" />
-        <h2 className="text-xl font-medium text-primary">Book Your Appointment</h2>
+      <div className="mb-6 flex items-center gap-3 sm:mb-8">
+        <Calendar className="h-6 w-6 shrink-0 text-secondary" />
+        <h2 className="text-lg font-medium text-primary sm:text-xl">Book Your Appointment</h2>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+        <div className="space-y-2 sm:col-span-2">
           <Label htmlFor="service">Service *</Label>
           <Select
             value={watch("service")}
             onValueChange={(value) => setValue("service", value, { shouldValidate: true })}
           >
-            <SelectTrigger id="service" aria-invalid={!!errors.service}>
+            <SelectTrigger id="service" className="h-12 w-full" aria-invalid={!!errors.service}>
               <SelectValue placeholder="Select a service" />
             </SelectTrigger>
             <SelectContent>
               {services.map((service) => (
                 <SelectItem key={service.slug} value={service.slug}>
-                  {service.name}
+                  {service.name} — from ${service.startingPrice}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -118,34 +107,12 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="professional">Professional *</Label>
-          <Select
-            value={watch("professional")}
-            onValueChange={(value) => setValue("professional", value, { shouldValidate: true })}
-          >
-            <SelectTrigger id="professional" aria-invalid={!!errors.professional}>
-              <SelectValue placeholder="Select a professional" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="any">Any Available Professional</SelectItem>
-              {teamMembers.map((member) => (
-                <SelectItem key={member.id} value={member.id}>
-                  {member.name} — {member.role}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {errors.professional && (
-            <p className="text-sm text-accent" role="alert">{errors.professional.message}</p>
-          )}
-        </div>
-
-        <div className="space-y-2">
           <Label htmlFor="date">Preferred Date *</Label>
           <Input
             id="date"
             type="date"
             min={minDate}
+            className="h-12 w-full"
             {...register("date")}
             aria-invalid={!!errors.date}
           />
@@ -160,7 +127,7 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
             value={watch("time")}
             onValueChange={(value) => setValue("time", value, { shouldValidate: true })}
           >
-            <SelectTrigger id="time" aria-invalid={!!errors.time}>
+            <SelectTrigger id="time" className="h-12 w-full" aria-invalid={!!errors.time}>
               <SelectValue placeholder="Select a time" />
             </SelectTrigger>
             <SelectContent>
@@ -178,7 +145,7 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="firstName">First Name *</Label>
-          <Input id="firstName" {...register("firstName")} aria-invalid={!!errors.firstName} />
+          <Input id="firstName" className="h-12" {...register("firstName")} aria-invalid={!!errors.firstName} />
           {errors.firstName && (
             <p className="text-sm text-accent" role="alert">{errors.firstName.message}</p>
           )}
@@ -186,7 +153,7 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="lastName">Last Name *</Label>
-          <Input id="lastName" {...register("lastName")} aria-invalid={!!errors.lastName} />
+          <Input id="lastName" className="h-12" {...register("lastName")} aria-invalid={!!errors.lastName} />
           {errors.lastName && (
             <p className="text-sm text-accent" role="alert">{errors.lastName.message}</p>
           )}
@@ -194,7 +161,7 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="phone">Phone *</Label>
-          <Input id="phone" type="tel" {...register("phone")} aria-invalid={!!errors.phone} />
+          <Input id="phone" type="tel" className="h-12" {...register("phone")} aria-invalid={!!errors.phone} />
           {errors.phone && (
             <p className="text-sm text-accent" role="alert">{errors.phone.message}</p>
           )}
@@ -202,7 +169,7 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="email">Email *</Label>
-          <Input id="email" type="email" {...register("email")} aria-invalid={!!errors.email} />
+          <Input id="email" type="email" className="h-12" {...register("email")} aria-invalid={!!errors.email} />
           {errors.email && (
             <p className="text-sm text-accent" role="alert">{errors.email.message}</p>
           )}
@@ -212,18 +179,18 @@ export function BookingForm({ defaultProfessional }: BookingFormProps) {
           <Label htmlFor="notes">Special Requests (Optional)</Label>
           <Textarea
             id="notes"
-            placeholder="Any allergies, preferences, or special requests..."
+            placeholder="Hair length, style preferences, allergies..."
             {...register("notes")}
           />
         </div>
       </div>
 
-      <Button type="submit" variant="secondary" size="lg" className="mt-8 w-full" disabled={isSubmitting}>
+      <Button type="submit" variant="secondary" size="lg" className="mt-6 h-14 w-full text-base sm:mt-8" disabled={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Request Appointment"}
       </Button>
 
       <p className="mt-4 text-center text-xs text-muted">
-        By submitting, you agree to our cancellation policy. We&apos;ll confirm within 2 hours.
+        We&apos;ll confirm within 2 hours. New clients: mention $20 OFF!
       </p>
     </form>
   );

@@ -6,10 +6,11 @@ import { generateSEO } from "@/lib/seo";
 import { services } from "@/constants/services";
 
 export const metadata = generateSEO({
-  title: "Beauty Services",
+  title: "Hair Braiding Services Columbus OH",
   description:
-    "Explore hair braiding and beauty services at Bb Salon SUITES in Columbus, OH — knotless braids, box braids, locs, extensions, lashes, eyebrows, and makeup from $100.",
+    "Box braids, knotless braids, faux locs, cornrows, sew-ins, lashes & makeup at Bb Salon SUITES Columbus Ohio. African hair braiding salon on Livingston Ave. From $100.",
   path: "/services",
+  keywords: "hair braiding services Columbus Ohio, box braids Columbus, knotless braids near me, African hair salon Columbus",
 });
 
 export default function ServicesPage() {
