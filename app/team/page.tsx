@@ -7,7 +7,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Meet the Team",
   description:
-    "Meet the award-winning beauty professionals at Lumière Beauty Studio in Columbus, OH — master colorists, stylists, barbers, estheticians, and lash artists.",
+    "Meet the beauty professionals at Bb Salon SUITES in Columbus, OH — expert braiders, lash artists, and makeup artists.",
   path: "/team",
 });
 

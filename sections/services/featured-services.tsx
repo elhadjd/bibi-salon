@@ -17,7 +17,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={service.image}
-          alt={`${service.name} at Lumière Beauty Studio`}
+          alt={`${service.name} at Bb Salon SUITES`}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

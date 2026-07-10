@@ -45,15 +45,15 @@ export function Navbar() {
                 isScrolled ? "text-primary" : "text-white"
               )}
             >
-              Lumière
+              Bb Salon
             </span>
             <span
               className={cn(
                 "text-[10px] uppercase tracking-[0.3em] transition-colors",
-                isScrolled ? "text-secondary" : "text-white/70"
+                isScrolled ? "text-accent" : "text-accent"
               )}
             >
-              Beauty Studio
+              SUITES & Hair Braiding
             </span>
           </Link>
 

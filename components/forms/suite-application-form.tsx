@@ -17,6 +17,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { salonSuites } from "@/constants/salon-suites";
+import { siteConfig } from "@/config/site";
+import { formatWeeklyPrice } from "@/lib/utils";
 
 const suiteSchema = z.object({
   firstName: z.string().min(2, "First name is required"),
@@ -56,7 +58,7 @@ export function SuiteApplicationForm() {
         <CheckCircle className="mx-auto h-16 w-16 text-secondary" />
         <h3 className="mt-6 text-2xl font-medium text-primary">Application Received!</h3>
         <p className="mt-3 text-muted">
-          Thank you for your interest in renting a salon suite at Lumière. Our team will
+          Thank you for your interest in renting a salon suite at Bb Salon SUITES. {siteConfig.owner} will
           contact you within 48 hours to schedule a tour.
         </p>
       </div>
@@ -135,7 +137,7 @@ export function SuiteApplicationForm() {
             <SelectContent>
               {salonSuites.filter((s) => s.available).map((suite) => (
                 <SelectItem key={suite.id} value={suite.id}>
-                  {suite.name} — ${suite.price}/mo
+                  {suite.name} — {formatWeeklyPrice(suite.price)}
                 </SelectItem>
               ))}
             </SelectContent>

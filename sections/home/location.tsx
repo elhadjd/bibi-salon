@@ -16,11 +16,11 @@ export function LocationSection() {
               Visit Us
             </p>
             <h2 id="location-heading" className="mt-3 text-3xl font-medium text-primary sm:text-4xl">
-              Find Us in Grandview
+              Find Us on Livingston Ave
             </h2>
             <p className="mt-4 text-lg text-muted">
-              Conveniently located on Grandview Avenue in the heart of Columbus, with complimentary
-              parking and easy access from downtown and the suburbs.
+              Located at 2177 Livingston Ave in Columbus — only 7 minutes from downtown
+              with free on-site parking.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -75,7 +75,7 @@ export function LocationSection() {
           <FadeIn delay={0.2}>
             <div className="overflow-hidden rounded-2xl border border-border/50 shadow-lg">
               <iframe
-                title="Lumière Beauty Studio location on Google Maps"
+                title="Bb Salon SUITES location on Google Maps"
                 src={`https://maps.google.com/maps?q=${siteConfig.address.coordinates.lat},${siteConfig.address.coordinates.lng}&z=15&output=embed`}
                 width="100%"
                 height="450"

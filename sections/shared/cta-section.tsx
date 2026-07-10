@@ -16,7 +16,7 @@ interface CTASectionProps {
 
 export function CTASection({
   title = "Ready for Your Transformation?",
-  description = "Book your appointment today and experience the Lumière difference. New clients receive a complimentary consultation.",
+  description = "Book your appointment today at Bb Salon SUITES. New clients get $20 OFF their first service!",
   primaryLabel = "Book Appointment",
   primaryHref = "/book",
   secondaryLabel = "Call Now",

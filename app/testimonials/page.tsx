@@ -10,7 +10,7 @@ import { siteConfig } from "@/config/site";
 export const metadata = generateSEO({
   title: "Testimonials & Reviews",
   description:
-    "Read 2,400+ five-star reviews from satisfied clients at Lumière Beauty Studio in Columbus, OH. Real stories from real transformations.",
+    "Read 350+ five-star reviews from satisfied clients at Bb Salon SUITES in Columbus, OH.",
   path: "/testimonials",
 });
 
@@ -26,7 +26,7 @@ export default function TestimonialsPage() {
       <PageHero
         eyebrow="Client Reviews"
         title="Loved by Columbus"
-        description="Don't just take our word for it — hear from the thousands of clients who trust Lumière."
+        description="Hear from clients who trust Bb Salon SUITES for their braiding and beauty needs."
       />
 
       <section className="section-padding bg-background">

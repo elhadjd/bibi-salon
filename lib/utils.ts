@@ -14,6 +14,10 @@ export function formatPrice(price: number): string {
   }).format(price);
 }
 
+export function formatWeeklyPrice(price: number): string {
+  return `${formatPrice(price)}/week`;
+}
+
 export function formatPhone(phone: string): string {
   const cleaned = phone.replace(/\D/g, "");
   const match = cleaned.match(/^1?(\d{3})(\d{3})(\d{4})$/);

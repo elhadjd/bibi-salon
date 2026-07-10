@@ -107,11 +107,11 @@ export function GallerySection({
           <Instagram className="mx-auto h-8 w-8 text-secondary" />
           <h3 className="mt-4 text-xl font-medium text-primary">Follow Us on Instagram</h3>
           <p className="mt-2 text-muted">
-            See daily transformations and behind-the-scenes at @lumierebeautystudio
+            See daily transformations at @bbsalonsuites
           </p>
           <Button variant="secondary" className="mt-6" asChild>
             <a
-              href="https://instagram.com/lumierebeautystudio"
+              href="https://instagram.com/bbsalonsuites"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -18,14 +18,17 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="inline-block">
-              <span className="font-display text-3xl font-medium">Lumière</span>
-              <p className="mt-1 text-xs uppercase tracking-[0.3em] text-secondary">
-                Beauty Studio
+              <span className="font-display text-3xl font-medium">
+                <span className="text-accent">Bb</span> Salon{" "}
+                <span className="text-secondary">SUITES</span>
+              </span>
+              <p className="mt-1 text-xs uppercase tracking-[0.3em] text-accent">
+                Hair Braiding
               </p>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
-              Columbus&apos;s premier luxury beauty destination. Where artistry meets
-              elegance.
+              Columbus&apos;s destination for expert hair braiding and luxury salon suites
+              for rent. Only 7 minutes from downtown.
             </p>
             <div className="mt-6 flex gap-4">
               <a
@@ -119,7 +122,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-secondary" />
-                <span>Mon–Sat: 8AM–8PM<br />Sun: 10AM–4PM</span>
+                <span>Mon–Sat: 8AM–7PM<br />Sun: Closed</span>
               </li>
             </ul>
           </div>

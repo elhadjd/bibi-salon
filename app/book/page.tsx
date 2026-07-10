@@ -9,7 +9,7 @@ import { Phone, Clock, MapPin } from "lucide-react";
 export const metadata = generateSEO({
   title: "Book Appointment",
   description:
-    "Book your luxury beauty appointment at Lumière Beauty Studio in Columbus, OH. Hair, color, nails, lashes, facials, and barber services available.",
+    "Book your appointment at Bb Salon SUITES in Columbus, OH. Braiding, lashes, eyebrows, and makeup services from $100. New clients get $20 OFF!",
   path: "/book",
 });
 

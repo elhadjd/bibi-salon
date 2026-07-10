@@ -28,12 +28,13 @@ import {
   suiteAmenities,
   suiteFAQs,
 } from "@/constants/salon-suites";
-import { formatPrice } from "@/lib/utils";
+import { formatWeeklyPrice } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 export const metadata = generateSEO({
   title: "Salon Suites for Rent",
   description:
-    "Rent a luxury salon suite at Lumière Beauty Studio in Columbus, OH. Flexible terms, premium amenities, and a thriving professional community for hairstylists, barbers, estheticians, and beauty professionals.",
+    "Rent a luxury salon suite at Bb Salon SUITES in Columbus, OH for just $150/week. All materials, Wi-Fi, shampoo sink & AC included. Only 7 min from downtown. Call (614) 622-4624.",
   path: "/salon-suites",
 });
 
@@ -58,18 +59,18 @@ export default function SalonSuitesPage() {
       <FAQSchema faqs={suiteFAQs} />
 
       <PageHero
-        eyebrow="For Beauty Professionals"
-        title="Your Dream Salon Suite Awaits"
-        description="Build your business in Columbus's most prestigious beauty destination. Premium suites, flexible terms, and a thriving professional community."
+        eyebrow="Now Leasing!"
+        title="Luxury Salon Suites for Rent"
+        description={`Only $150/week — all materials & Wi-Fi included. 7 minutes from downtown Columbus. Call ${siteConfig.phone} or contact ${siteConfig.owner} today!`}
       />
 
       <section className="section-padding">
         <div className="container-wide">
           <FadeIn>
             <SectionHeading
-              eyebrow="Why Lumière"
-              title="Benefits of Suite Rental"
-              description="Everything you need to grow your independent beauty business."
+              eyebrow="Why Bb Salon"
+              title="The Perfect Space to Grow Your Business"
+              description="Everything included for just $150/week. Promote your business in a professional, clean environment."
             />
           </FadeIn>
 
@@ -112,7 +113,7 @@ export default function SalonSuitesPage() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&q=80"
-                  alt="Luxury salon suite interior at Lumière Beauty Studio"
+                  alt="Salon suite interior at Bb Salon SUITES Columbus"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -129,7 +130,7 @@ export default function SalonSuitesPage() {
             <SectionHeading
               eyebrow="Available Now"
               title="Salon Suite Pricing"
-              description="Transparent pricing with no hidden fees. All utilities and amenities included."
+              description="$150 per week — all materials, Wi-Fi, utilities, and amenities included. No hidden fees."
             />
           </FadeIn>
 
@@ -155,9 +156,8 @@ export default function SalonSuitesPage() {
                   <div className="p-6">
                     <h3 className="text-xl font-medium text-primary">{suite.name}</h3>
                     <p className="mt-1 text-sm text-muted">{suite.size}</p>
-                    <p className="mt-4 text-3xl font-medium text-secondary">
-                      {formatPrice(suite.price)}
-                      <span className="text-base font-normal text-muted">/month</span>
+                    <p className="mt-4 text-3xl font-medium text-accent">
+                      {formatWeeklyPrice(suite.price)}
                     </p>
                     <ul className="mt-4 space-y-2">
                       {suite.amenities.map((amenity) => (
@@ -181,8 +181,8 @@ export default function SalonSuitesPage() {
             <FadeIn>
               <h2 className="text-3xl font-medium text-primary">Apply for a Suite</h2>
               <p className="mt-4 text-muted">
-                Ready to take the next step in your beauty career? Submit your application and
-                we&apos;ll schedule a personal tour of our available suites.
+                Ready to grow your beauty business? Contact {siteConfig.owner} to schedule a tour
+                of our available suites at 2177 Livingston Ave.
               </p>
               <div className="mt-8 space-y-4 text-sm text-muted">
                 <p>
@@ -221,11 +221,11 @@ export default function SalonSuitesPage() {
       </section>
 
       <CTASection
-        title="Ready to Build Your Empire?"
-        description="Schedule a tour of our available suites and see why Columbus's top beauty professionals choose Lumière."
+        title="Call Today to Schedule a Tour!"
+        description={`Contact ${siteConfig.owner} at ${siteConfig.phone} or WhatsApp ${siteConfig.whatsappDisplay}. Suites are $150/week with everything included.`}
         primaryLabel="Apply Now"
         primaryHref="/salon-suites#apply"
-        secondaryLabel="Call Us"
+        secondaryLabel={`Call ${siteConfig.phone}`}
         variant="dark"
       />
     </>

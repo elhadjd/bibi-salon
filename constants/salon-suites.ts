@@ -2,120 +2,112 @@ import { SalonSuite, FAQItem } from "@/types";
 
 export const salonSuites: SalonSuite[] = [
   {
-    id: "suite-101",
-    name: "Suite 101 — The Studio",
-    size: "120 sq ft",
-    price: 1200,
+    id: "suite-window",
+    name: "Window Suite",
+    size: "Private suite with natural light",
+    price: 150,
+    pricePeriod: "week",
     available: true,
-    amenities: ["Private entrance", "Shampoo bowl", "Styling chair", "Storage"],
-    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",
-  },
-  {
-    id: "suite-102",
-    name: "Suite 102 — The Atelier",
-    size: "150 sq ft",
-    price: 1450,
-    available: true,
-    amenities: ["Corner suite", "Natural light", "Double storage", "Wash station"],
+    amenities: ["Large window", "Shampoo sink", "Air conditioning", "Free Wi-Fi"],
     image: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&q=80",
   },
   {
-    id: "suite-103",
-    name: "Suite 103 — The Loft",
-    size: "180 sq ft",
-    price: 1650,
-    available: false,
-    amenities: ["Premium corner", "Extra windows", "Reception nook", "Premium fixtures"],
-    image: "https://images.unsplash.com/photo-1633681926022-84c23e8cb29d?w=800&q=80",
+    id: "suite-standard",
+    name: "Standard Suite",
+    size: "Fully equipped private suite",
+    price: 150,
+    pricePeriod: "week",
+    available: true,
+    amenities: ["Shampoo sink", "Air conditioning", "Free Wi-Fi", "Storage space"],
+    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",
   },
   {
-    id: "suite-104",
-    name: "Suite 104 — The Salon",
-    size: "200 sq ft",
-    price: 1850,
+    id: "suite-premium",
+    name: "Premium Suite",
+    size: "Spacious suite with premium finishes",
+    price: 150,
+    pricePeriod: "week",
     available: true,
-    amenities: ["Largest suite", "Private bathroom", "Premium lighting", "VIP entrance"],
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80",
+    amenities: ["Window available", "Shampoo sink", "AC & heating", "All materials included"],
+    image: "https://images.unsplash.com/photo-1633681926022-84c23e8cb29d?w=800&q=80",
   },
 ];
 
 export const suiteBenefits = [
   {
-    title: "Financial Independence",
-    description: "Keep 100% of your earnings. No commission splits, no booth rental surprises.",
+    title: "Only $150/Week",
+    description: "Affordable weekly rent with all materials and internet included. No hidden fees.",
     icon: "TrendingUp",
   },
   {
-    title: "Premium Location",
-    description: "Grandview Avenue visibility with high foot traffic and affluent clientele.",
+    title: "7 Min from Downtown",
+    description: "Prime Livingston Avenue location — just 7 minutes from downtown Columbus.",
     icon: "MapPin",
   },
   {
-    title: "All-Inclusive Amenities",
-    description: "Utilities, WiFi, laundry, cleaning, and reception support included.",
+    title: "All Materials Included",
+    description: "Wi-Fi, utilities, shampoo sink, air conditioning, and supplies included in rent.",
     icon: "Sparkles",
   },
   {
-    title: "Professional Community",
-    description: "Join a network of successful independent beauty professionals.",
+    title: "Grow Your Business",
+    description: "The perfect space to promote and grow your beauty business independently.",
     icon: "Users",
   },
   {
-    title: "Flexible Terms",
-    description: "Month-to-month options available. Grow your business on your timeline.",
+    title: "Now Leasing",
+    description: "Suites available now. Call today to schedule a personal tour of our space.",
     icon: "Calendar",
   },
   {
-    title: "Marketing Support",
-    description: "Featured on our website, social media, and Google Business Profile.",
+    title: "Professional Environment",
+    description: "Clean, modern suites in a professional salon building with great visibility.",
     icon: "Megaphone",
   },
 ];
 
 export const suiteAmenities = [
-  "24/7 secure building access",
-  "High-speed WiFi throughout",
-  "Shared laundry facilities",
-  "Professional reception area",
-  "Client waiting lounge",
-  "Complimentary parking",
-  "Weekly common area cleaning",
-  "Security cameras & alarm system",
-  "Break room with kitchenette",
-  "Marketing & social media features",
-  "Google Business Profile listing",
-  "Flexible lease terms",
+  "Window suites available",
+  "Shampoo sink in every suite",
+  "Air conditioning & heating",
+  "Free high-speed Wi-Fi",
+  "All materials included in rent",
+  "Professional, clean environment",
+  "Only 7 minutes from downtown Columbus",
+  "Free on-site parking",
+  "Flexible weekly lease terms",
+  "Perfect for independent beauty professionals",
 ];
 
 export const suiteFAQs: FAQItem[] = [
   {
-    question: "What is included in the monthly rent?",
+    question: "How much does a salon suite cost?",
     answer:
-      "Your monthly rent includes utilities (electric, water, heat), high-speed WiFi, common area maintenance, laundry facilities, reception support, security, and marketing features on our platforms. You provide your own equipment and supplies.",
+      "Our luxury salon suites are $150 per week. This includes all materials, high-speed Wi-Fi, utilities, shampoo sink, and air conditioning. No hidden fees.",
     category: "suites",
   },
   {
-    question: "What lease terms are available?",
+    question: "What is included in the weekly rent?",
     answer:
-      "We offer flexible month-to-month leases as well as 6-month and 12-month terms with discounted rates. A security deposit equal to one month's rent is required.",
+      "Your $150/week rent includes all materials, free Wi-Fi, utilities, shampoo sink, air conditioning, and use of a professional, clean suite. Everything you need to run your business is included.",
     category: "suites",
   },
   {
-    question: "Can I customize my suite?",
+    question: "Who can rent a suite?",
     answer:
-      "Yes! You can personalize your suite with your branding, décor, and equipment layout. We approve modifications to ensure they meet safety standards and maintain our premium aesthetic.",
+      "Our suites are perfect for hairstylists, braiders, estheticians, lash artists, makeup artists, and other beauty professionals looking to grow their independent business.",
     category: "suites",
   },
   {
-    question: "Do you help with building a clientele?",
+    question: "How do I schedule a tour?",
     answer:
-      "While building your clientele is your responsibility, we provide significant support through our website, social media features, Google Business Profile integration, and cross-referrals within our professional community.",
+      "Call us at (614) 622-4624 or message us on WhatsApp at +1 (380) 265-5069 to schedule a tour. Contact Bibiche to see available suites.",
     category: "suites",
   },
   {
-    question: "What professions are accepted?",
+    question: "Are window suites available?",
     answer:
-      "We welcome licensed hairstylists, colorists, barbers, nail technicians, lash artists, estheticians, makeup artists, and other beauty professionals. All applicants must hold valid Ohio licenses.",
+      "Yes! We have window suites available with natural light — perfect for creating content and giving clients a bright, welcoming experience.",
     category: "suites",
   },
 ];
@@ -124,49 +116,49 @@ export const generalFAQs: FAQItem[] = [
   {
     question: "How do I book an appointment?",
     answer:
-      "You can book online through our website, call us at (614) 555-0147, or visit us in person. We recommend booking 1-2 weeks in advance for popular stylists and color services.",
+      "Book online through our website, call (614) 622-4624, or message us on WhatsApp at +1 (380) 265-5069. We recommend booking in advance, especially for braiding services.",
     category: "general",
   },
   {
-    question: "What is your cancellation policy?",
+    question: "What services do you offer?",
     answer:
-      "We require 24-hour notice for cancellations. Late cancellations or no-shows may be charged 50% of the scheduled service fee. We understand emergencies happen — please call us as soon as possible.",
+      "We specialize in hair braiding (knotless, box, boho, cornrows), faux locs, twists, hair extensions, sew-ins, closures, eyebrows, lashes, and makeup. We do not offer men's haircuts.",
     category: "general",
   },
   {
-    question: "Do you offer consultations?",
+    question: "How much do services cost?",
     answer:
-      "Yes! We offer complimentary 15-minute consultations for color services and extensions. For major transformations, we highly recommend scheduling a consultation before your service appointment.",
+      "Our services start at $100. Final pricing depends on hair length, style complexity, and add-ons. New clients may qualify for $20 off their first service — ask when booking!",
     category: "general",
   },
   {
-    question: "What forms of payment do you accept?",
+    question: "What are your hours?",
     answer:
-      "We accept all major credit cards, debit cards, Apple Pay, Google Pay, and cash. Gratuity can be added to card payments or given directly to your service provider.",
+      "We are open Monday through Saturday, 8:00 AM to 7:00 PM. We are closed on Sundays.",
     category: "general",
   },
   {
-    question: "Is parking available?",
+    question: "Where are you located?",
     answer:
-      "Yes, we offer complimentary parking in our private lot behind the building. Additional street parking is available on Grandview Avenue.",
+      "We are located at 2177 Livingston Ave, Columbus, OH 43209 — only 7 minutes from downtown Columbus with free on-site parking.",
     category: "general",
   },
   {
-    question: "Do you serve walk-ins?",
+    question: "Do you offer walk-ins?",
     answer:
-      "We welcome walk-ins based on availability, but appointments are strongly recommended to ensure you receive service with your preferred professional.",
+      "Walk-ins are welcome based on availability, but appointments are strongly recommended for braiding and longer services.",
     category: "general",
   },
   {
-    question: "What COVID-19 safety measures are in place?",
+    question: "Do you cut men's hair?",
     answer:
-      "We maintain rigorous sanitation protocols including station disinfection between clients, regular deep cleaning, and HEPA air filtration throughout the salon.",
+      "No, we do not offer men's haircuts. We specialize in braiding, protective styles, extensions, lashes, eyebrows, and makeup for women.",
     category: "general",
   },
   {
-    question: "Can I bring children to my appointment?",
+    question: "Is there a promotion for new clients?",
     answer:
-      "Children are welcome but must be supervised at all times. For lengthy services like color or braids, we recommend arranging childcare for the best experience.",
+      "Yes! New clients receive $20 OFF their first service. Mention this offer when booking your appointment.",
     category: "general",
   },
 ];
