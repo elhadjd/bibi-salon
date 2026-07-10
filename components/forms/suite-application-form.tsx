@@ -19,6 +19,7 @@ import {
 import { salonSuites } from "@/constants/salon-suites";
 import { siteConfig } from "@/config/site";
 import { formatWeeklyPrice } from "@/lib/utils";
+import { getFormErrorMessage, parseApiResponse } from "@/lib/api/form-errors";
 
 const suiteSchema = z.object({
   firstName: z.string().min(2, "First name is required"),
@@ -34,8 +35,14 @@ const suiteSchema = z.object({
 
 type SuiteFormValues = z.infer<typeof suiteSchema>;
 
+function getSuiteName(suiteId?: string): string | undefined {
+  if (!suiteId) return undefined;
+  return salonSuites.find((s) => s.id === suiteId)?.name;
+}
+
 export function SuiteApplicationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -47,9 +54,53 @@ export function SuiteApplicationForm() {
   });
 
   const onSubmit = async (data: SuiteFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Suite application submitted:", data);
-    setIsSubmitted(true);
+    setSubmitError(null);
+
+    const preferredSuiteName = getSuiteName(data.preferredSuite);
+    const applicationSummary = [
+      data.message,
+      `Profession: ${data.profession}`,
+      `Experience: ${data.experience}`,
+      preferredSuiteName ? `Preferred suite: ${preferredSuiteName}` : null,
+      `Preferred start date: ${data.startDate}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    try {
+      const response = await fetch("/api/site/contacts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `${data.firstName} ${data.lastName}`,
+          email: data.email,
+          phone: data.phone,
+          subject: "Salon Suite Rental Application",
+          message: applicationSummary,
+          service: preferredSuiteName || "Salon Suite Rental",
+          serviceType: "suite_rental",
+          metadata: {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            profession: data.profession,
+            experience: data.experience,
+            preferred_suite: preferredSuiteName ?? data.preferredSuite,
+            preferred_start_date: data.startDate,
+            page_url: "/salon-suites",
+          },
+        }),
+      });
+
+      const result = await parseApiResponse(response);
+      if (!result.ok) {
+        setSubmitError(result.message || "Unable to submit your application. Please try again.");
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      setSubmitError(getFormErrorMessage(error, "Unable to submit your application. Please try again."));
+    }
   };
 
   if (isSubmitted) {
@@ -74,6 +125,12 @@ export function SuiteApplicationForm() {
       noValidate
     >
       <h2 className="mb-8 text-xl font-medium text-primary">Suite Rental Application</h2>
+
+      {submitError && (
+        <p className="mb-6 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-accent" role="alert">
+          {submitError}
+        </p>
+      )}
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2">

@@ -24,8 +24,8 @@ export const metadata = {
     description: homePageDescription,
   }),
   icons: {
-    icon: "/images/logo.svg",
-    apple: "/images/logo.svg",
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
   },
 };
 
