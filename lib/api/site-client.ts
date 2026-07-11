@@ -40,9 +40,39 @@ interface SiteApiSuccess<T> {
   appointment?: T;
 }
 
-interface SiteApiError {
+interface SiteApiErrorBody {
   message?: string;
   errors?: Record<string, string[]>;
+  success?: boolean;
+}
+
+function extractErrorMessage(data: unknown): string | undefined {
+  if (typeof data === "string" && data.trim()) {
+    return data;
+  }
+
+  if (data && typeof data === "object") {
+    const body = data as SiteApiErrorBody;
+    if (body.errors) {
+      const validationMessage = Object.values(body.errors).flat().join(" ");
+      if (validationMessage) return validationMessage;
+    }
+    if (body.message) return body.message;
+  }
+
+  return undefined;
+}
+
+function assertSuccessResponse<T>(data: unknown, status: number): SiteApiSuccess<T> {
+  if (!data || typeof data !== "object" || !("success" in data) || (data as SiteApiSuccess<T>).success !== true) {
+    throw new SiteApiRequestError(
+      extractErrorMessage(data) || `External API did not confirm success (HTTP ${status}).`,
+      status >= 400 ? status : 502,
+      data && typeof data === "object" ? (data as SiteApiErrorBody).errors : undefined
+    );
+  }
+
+  return data as SiteApiSuccess<T>;
 }
 
 async function siteApiRequest<T>(
@@ -50,30 +80,44 @@ async function siteApiRequest<T>(
   body: Record<string, unknown>
 ): Promise<{ data: SiteApiSuccess<T>; status: number }> {
   const { baseUrl, apiKey } = getSiteApiConfig();
+  const url = `${baseUrl}${path}`;
 
-  const response = await fetch(`${baseUrl}${path}`, {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
       key: apiKey,
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({
+      ...body,
+      key: apiKey,
+    }),
   });
 
-  const data = (await response.json().catch(() => ({}))) as SiteApiSuccess<T> & SiteApiError;
+  const rawText = await response.text();
+  let data: unknown = {};
+
+  if (rawText) {
+    try {
+      data = JSON.parse(rawText);
+    } catch {
+      data = rawText;
+    }
+  }
 
   if (!response.ok) {
-    const validationMessage = data.errors
-      ? Object.values(data.errors).flat().join(" ")
-      : undefined;
     throw new SiteApiRequestError(
-      validationMessage || data.message || "Request failed",
+      extractErrorMessage(data) || `External API request failed (HTTP ${response.status}).`,
       response.status,
-      data.errors
+      data && typeof data === "object" ? (data as SiteApiErrorBody).errors : undefined
     );
   }
 
-  return { data: data as SiteApiSuccess<T>, status: response.status };
+  return {
+    data: assertSuccessResponse<T>(data, response.status),
+    status: response.status,
+  };
 }
 
 export class SiteApiRequestError extends Error {
@@ -97,4 +141,10 @@ export function submitAppointment(payload: AppointmentPayload) {
 
 export function isSiteApiConfigured(): boolean {
   return Boolean(process.env.SITE_API_BASE_URL && process.env.SITE_API_KEY);
+}
+
+export function getSiteApiTarget(path: string): string | null {
+  const baseUrl = process.env.SITE_API_BASE_URL?.replace(/\/$/, "");
+  if (!baseUrl) return null;
+  return `${baseUrl}${path}`;
 }
