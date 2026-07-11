@@ -9,11 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { getFormErrorMessage, parseApiResponse } from "@/lib/api/form-errors";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Valid email required"),
-  phone: z.string().optional(),
+  phone: z.string().min(10, "Valid phone number required"),
   subject: z.string().min(3, "Subject is required"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
@@ -22,6 +23,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -31,9 +33,32 @@ export function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Contact submitted:", data);
-    setIsSubmitted(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/site/contacts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          subject: data.subject,
+          message: data.message,
+          serviceType: "contact",
+        }),
+      });
+
+      const result = await parseApiResponse(response);
+      if (!result.ok) {
+        setSubmitError(result.message || "Unable to send your message. Please try again.");
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      setSubmitError(getFormErrorMessage(error, "Unable to send your message. Please try again."));
+    }
   };
 
   if (isSubmitted) {
@@ -54,6 +79,12 @@ export function ContactForm() {
       className="rounded-2xl border border-border/50 bg-white p-8 shadow-sm"
       noValidate
     >
+      {submitError && (
+        <p className="mb-6 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-accent" role="alert">
+          {submitError}
+        </p>
+      )}
+
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2 sm:col-span-2">
           <Label htmlFor="name">Full Name *</Label>
@@ -68,8 +99,9 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" type="tel" {...register("phone")} />
+          <Label htmlFor="phone">Phone *</Label>
+          <Input id="phone" type="tel" {...register("phone")} aria-invalid={!!errors.phone} />
+          {errors.phone && <p className="text-sm text-accent" role="alert">{errors.phone.message}</p>}
         </div>
 
         <div className="space-y-2 sm:col-span-2">

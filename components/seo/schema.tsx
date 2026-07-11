@@ -25,9 +25,9 @@ export function LocalBusinessSchema() {
     email: siteConfig.email,
     image: [
       `${siteConfig.url}/images/hero-portrait.jpg`,
-      `${siteConfig.url}/images/logo.svg`,
+      `${siteConfig.url}/images/logo.png`,
     ],
-    logo: `${siteConfig.url}/images/logo.svg`,
+    logo: `${siteConfig.url}/images/logo.png`,
     priceRange: "$$",
     currenciesAccepted: "USD",
     paymentAccepted: "Cash, Credit Card, Debit Card",
@@ -186,7 +186,7 @@ export function ArticleSchema({
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/images/logo.svg`,
+        url: `${siteConfig.url}/images/logo.png`,
       },
     },
     mainEntityOfPage: {

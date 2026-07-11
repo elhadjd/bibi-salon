@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "@/constants/services";
+import { getFormErrorMessage, parseApiResponse } from "@/lib/api/form-errors";
 
 const bookingSchema = z.object({
   service: z.string().min(1, "Please select a service"),
@@ -39,8 +40,13 @@ const timeSlots = [
   "8:00 PM", "8:30 PM", "9:00 PM", "9:30 PM",
 ];
 
+function getServiceName(slug: string): string {
+  return services.find((s) => s.slug === slug)?.name ?? slug;
+}
+
 export function BookingForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -52,9 +58,28 @@ export function BookingForm() {
   });
 
   const onSubmit = async (data: BookingFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Booking submitted:", data);
-    setIsSubmitted(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/site/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          service: getServiceName(data.service),
+        }),
+      });
+
+      const result = await parseApiResponse(response);
+      if (!result.ok) {
+        setSubmitError(result.message || "Unable to submit your appointment. Please try again.");
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      setSubmitError(getFormErrorMessage(error, "Unable to submit your appointment. Please try again."));
+    }
   };
 
   if (isSubmitted) {
@@ -82,6 +107,12 @@ export function BookingForm() {
         <Calendar className="h-6 w-6 shrink-0 text-secondary" />
         <h2 className="text-lg font-medium text-primary sm:text-xl">Book Your Appointment</h2>
       </div>
+
+      {submitError && (
+        <p className="mb-6 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-accent" role="alert">
+          {submitError}
+        </p>
+      )}
 
       <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
         <div className="space-y-2 sm:col-span-2">

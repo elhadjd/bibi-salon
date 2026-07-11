@@ -1,5 +1,5 @@
 export const brandImages = {
-  logo: "/images/logo.svg",
+  logo: "/images/logo.png",
   logoAlt: "Bb Salon SUITES — Hair & Braiding logo",
   banner: "/images/banner.svg",
   bannerAlt: "Bb Salon SUITES promotional banner — Your Beauty, Our Passion",
