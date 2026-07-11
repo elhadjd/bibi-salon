@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { submitContact, isSiteApiError, isSiteApiConfigured } from "@/lib/api/site-client";
+import { submitAppointment, isSiteApiError, isSiteApiConfigured } from "@/lib/api/site-client";
 import { to24HourTime } from "@/lib/format-time";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +24,8 @@ export async function POST(request: NextRequest) {
       time,
       service,
       notes,
+      department_id,
+      metadata,
     } = body;
 
     if (!firstName || !lastName || !email || !phone || !date || !time) {
@@ -33,44 +35,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let time24 = time;
+    let time24: string;
     try {
       time24 = to24HourTime(time);
       if (time24.length === 5) {
         time24 = `${time24}:00`;
       }
     } catch {
-      // Keep original time string if conversion fails
+      return NextResponse.json(
+        { success: false, message: "Invalid time format. Please select a valid time slot." },
+        { status: 422 }
+      );
     }
 
     const pageUrl = request.headers.get("referer") ?? undefined;
-    const serviceName = service || "General";
 
-    const messageLines = [
-      notes,
-      `Preferred date: ${date}`,
-      `Preferred time: ${time} (${time24})`,
-      `Service: ${serviceName}`,
-    ].filter(Boolean);
-
-    const result = await submitContact({
-      name: `${firstName} ${lastName}`,
+    const result = await submitAppointment({
+      first_name: firstName,
+      last_name: lastName,
       email,
       phone,
-      subject: `Appointment Request: ${serviceName}`,
-      message: messageLines.join("\n"),
-      service: serviceName,
-      serviceType: "appointment",
+      date,
+      time: time24,
+      service,
+      notes,
+      department_id,
       metadata: {
-        first_name: firstName,
-        last_name: lastName,
-        date,
-        time: time24,
-        preferred_time_12h: time,
-        service: serviceName,
-        notes,
+        ...metadata,
         ...(pageUrl ? { page_url: pageUrl } : {}),
         source: "bb-salon-website",
+        preferred_time_12h: time,
       },
     });
 
