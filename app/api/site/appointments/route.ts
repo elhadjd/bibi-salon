@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { submitAppointment, SiteApiRequestError, isSiteApiConfigured } from "@/lib/api/site-client";
 import { to24HourTime } from "@/lib/format-time";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   if (!isSiteApiConfigured()) {
     return NextResponse.json(

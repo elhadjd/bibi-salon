@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { submitContact, SiteApiRequestError, isSiteApiConfigured } from "@/lib/api/site-client";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   if (!isSiteApiConfigured()) {
     return NextResponse.json(
