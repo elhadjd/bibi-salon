@@ -16,7 +16,7 @@ export async function parseApiResponse(response: Response): Promise<{
   };
 
   return {
-    ok: response.ok && data.success !== false,
+    ok: response.ok && data.success === true,
     message: data.message || data.error,
   };
 }
