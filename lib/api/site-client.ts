@@ -33,7 +33,7 @@ export interface AppointmentPayload {
   metadata?: Record<string, unknown>;
 }
 
-interface SiteApiSuccess<T> {
+export interface SiteApiSuccess<T = unknown> {
   success: true;
   message: string;
   contact?: T;
@@ -63,16 +63,41 @@ function extractErrorMessage(data: unknown): string | undefined {
   return undefined;
 }
 
-function assertSuccessResponse<T>(data: unknown, status: number): SiteApiSuccess<T> {
-  if (!data || typeof data !== "object" || !("success" in data) || (data as SiteApiSuccess<T>).success !== true) {
-    throw new SiteApiRequestError(
-      extractErrorMessage(data) || `External API did not confirm success (HTTP ${status}).`,
-      status >= 400 ? status : 502,
-      data && typeof data === "object" ? (data as SiteApiErrorBody).errors : undefined
-    );
+function isEmptyResponse(data: unknown, rawText: string): boolean {
+  if (!rawText.trim() || rawText.trim() === "{}") return true;
+  if (data && typeof data === "object" && Object.keys(data as object).length === 0) return true;
+  return false;
+}
+
+function normalizeSuccessResponse<T>(data: unknown): SiteApiSuccess<T> {
+  if (data && typeof data === "object") {
+    const body = data as Record<string, unknown>;
+
+    if (body.success === true) {
+      return body as unknown as SiteApiSuccess<T>;
+    }
+
+    if (body.appointment) {
+      return {
+        success: true,
+        message: (body.message as string) || "Appointment created successfully",
+        appointment: body.appointment as T,
+      };
+    }
+
+    if (body.contact) {
+      return {
+        success: true,
+        message: (body.message as string) || "Contact submitted successfully",
+        contact: body.contact as T,
+      };
+    }
   }
 
-  return data as SiteApiSuccess<T>;
+  throw new SiteApiRequestError(
+    extractErrorMessage(data) || "External API did not confirm success.",
+    502
+  );
 }
 
 async function siteApiRequest<T>(
@@ -93,10 +118,11 @@ async function siteApiRequest<T>(
       ...body,
       key: apiKey,
     }),
+    cache: "no-store",
   });
 
   const rawText = await response.text();
-  let data: unknown = {};
+  let data: unknown = null;
 
   if (rawText) {
     try {
@@ -114,8 +140,15 @@ async function siteApiRequest<T>(
     );
   }
 
+  if (isEmptyResponse(data, rawText)) {
+    throw new SiteApiRequestError(
+      "External API returned an empty response. The appointments module may not be configured in Zyvo.",
+      502
+    );
+  }
+
   return {
-    data: assertSuccessResponse<T>(data, response.status),
+    data: normalizeSuccessResponse<T>(data),
     status: response.status,
   };
 }
@@ -129,6 +162,17 @@ export class SiteApiRequestError extends Error {
     super(message);
     this.name = "SiteApiRequestError";
   }
+}
+
+export function isSiteApiError(error: unknown): error is SiteApiRequestError {
+  return (
+    error instanceof SiteApiRequestError ||
+    (typeof error === "object" &&
+      error !== null &&
+      "name" in error &&
+      (error as SiteApiRequestError).name === "SiteApiRequestError" &&
+      "status" in error)
+  );
 }
 
 export function submitContact(payload: ContactPayload) {

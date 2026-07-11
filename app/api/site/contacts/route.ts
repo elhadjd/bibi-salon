@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { submitContact, SiteApiRequestError, isSiteApiConfigured } from "@/lib/api/site-client";
+import { submitContact, isSiteApiError, isSiteApiConfigured } from "@/lib/api/site-client";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   if (!isSiteApiConfigured()) {
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result.data, { status: result.status });
   } catch (error) {
-    if (error instanceof SiteApiRequestError) {
+    if (isSiteApiError(error)) {
       return NextResponse.json(
         { success: false, message: error.message, errors: error.errors },
         { status: error.status }
