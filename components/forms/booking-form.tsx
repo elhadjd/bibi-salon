@@ -60,13 +60,35 @@ export function BookingForm() {
   const onSubmit = async (data: BookingFormValues) => {
     setSubmitError(null);
 
+    const serviceName = getServiceName(data.service);
+    const messageLines = [
+      data.notes,
+      `Preferred date: ${data.date}`,
+      `Preferred time: ${data.time}`,
+      `Service: ${serviceName}`,
+    ].filter(Boolean);
+
     try {
-      const response = await fetch("/api/site/appointments", {
+      const response = await fetch("/api/site/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...data,
-          service: getServiceName(data.service),
+          name: `${data.firstName} ${data.lastName}`,
+          email: data.email,
+          phone: data.phone,
+          subject: `Appointment Request: ${serviceName}`,
+          message: messageLines.join("\n"),
+          service: serviceName,
+          serviceType: "appointment",
+          metadata: {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            date: data.date,
+            time: data.time,
+            service: serviceName,
+            notes: data.notes,
+            page_url: "/book",
+          },
         }),
       });
 
