@@ -1,2 +1,17 @@
-# Lumière Beauty Studio - Columbus, Ohio
-# https://lumierebeautystudio.com
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /admin/
+
+# *
+User-agent: *
+Disallow: /api/
+
+# Host
+Host: https://bbsalonsuites.com
+
+# Sitemaps
+Sitemap: https://bbsalonsuites.com/sitemap.xml
