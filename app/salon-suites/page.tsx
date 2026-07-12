@@ -28,6 +28,7 @@ import {
   suiteAmenities,
   suiteFAQs,
 } from "@/constants/salon-suites";
+import { suiteGalleryImages } from "@/constants/images";
 import { formatWeeklyPrice } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
@@ -113,7 +114,7 @@ export default function SalonSuitesPage() {
             <FadeIn delay={0.2}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/suite-premium.jpg"
+                  src="/images/suite-station.jpg"
                   alt="Salon suite interior at Bb Salon SUITES Columbus"
                   fill
                   className="object-cover"
@@ -170,6 +171,33 @@ export default function SalonSuitesPage() {
                     </ul>
                   </div>
                 </article>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-background">
+        <div className="container-wide">
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Tour Our Suites"
+              title="Real Salon Suites at Bb Salon SUITES"
+              description="Pink walls, gold styling chairs, arched LED mirrors, and modern lighting — your private space to grow your business."
+            />
+          </FadeIn>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {suiteGalleryImages.map((src, index) => (
+              <FadeIn key={src} delay={index * 0.05}>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/50 shadow-sm">
+                  <Image
+                    src={src}
+                    alt={`Bb Salon SUITES private suite ${index + 1} — Columbus OH`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
               </FadeIn>
             ))}
           </div>

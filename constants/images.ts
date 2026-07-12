@@ -67,7 +67,7 @@ export const galleryBrandImages = [
   {
     id: "g8",
     src: "/images/suite-standard.jpg",
-    alt: "Private salon suite with pink walls and gold styling chair",
+    alt: "Salon suite with pink walls, gold styling chair and arched LED mirror",
     category: "suites" as const,
     width: 800,
     height: 600,
@@ -75,7 +75,7 @@ export const galleryBrandImages = [
   {
     id: "g9",
     src: "/images/suite-window.jpg",
-    alt: "Salon suite with LED mirror and modern lighting",
+    alt: "Salon suite with arched LED mirror and black gold styling chair",
     category: "suites" as const,
     width: 800,
     height: 600,
@@ -83,7 +83,31 @@ export const galleryBrandImages = [
   {
     id: "g10",
     src: "/images/suite-premium.jpg",
-    alt: "Premium salon suite interior at Bb Salon SUITES",
+    alt: "Premium salon suite with hexagonal LED ceiling and pink walls",
+    category: "suites" as const,
+    width: 800,
+    height: 600,
+  },
+  {
+    id: "g11",
+    src: "/images/suite-station.jpg",
+    alt: "Private styling station in Bb Salon SUITES Columbus",
+    category: "suites" as const,
+    width: 800,
+    height: 600,
+  },
+  {
+    id: "g12",
+    src: "/images/suite-mirror.jpg",
+    alt: "Full-length arched LED mirror in salon suite",
+    category: "suites" as const,
+    width: 800,
+    height: 1000,
+  },
+  {
+    id: "g13",
+    src: "/images/suite-corner.jpg",
+    alt: "Corner view of pink salon suite with gold chair",
     category: "suites" as const,
     width: 800,
     height: 600,
@@ -94,4 +118,16 @@ export const suiteImages = {
   standard: "/images/suite-standard.jpg",
   window: "/images/suite-window.jpg",
   premium: "/images/suite-premium.jpg",
+  station: "/images/suite-station.jpg",
+  mirror: "/images/suite-mirror.jpg",
+  corner: "/images/suite-corner.jpg",
 } as const;
+
+export const suiteGalleryImages = [
+  suiteImages.standard,
+  suiteImages.window,
+  suiteImages.premium,
+  suiteImages.station,
+  suiteImages.mirror,
+  suiteImages.corner,
+] as const;
