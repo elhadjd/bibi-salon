@@ -1,6 +1,7 @@
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Providers } from "@/providers/query-provider";
 import { MainLayout } from "@/components/layout/main-layout";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { LocalBusinessSchema, WebSiteSchema } from "@/components/seo/schema";
 import { homePageDescription } from "@/config/keywords";
 import { generateSEO } from "@/lib/seo";
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <head>
+        <GoogleAnalytics />
         <LocalBusinessSchema />
         <WebSiteSchema />
       </head>
