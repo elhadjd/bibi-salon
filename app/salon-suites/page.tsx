@@ -113,7 +113,7 @@ export default function SalonSuitesPage() {
             <FadeIn delay={0.2}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&q=80"
+                  src="/images/suite-premium.jpg"
                   alt="Salon suite interior at Bb Salon SUITES Columbus"
                   fill
                   className="object-cover"

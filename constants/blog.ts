@@ -19,7 +19,7 @@ Box braids are a classic protective style with a defined, uniform look. They're 
 ## Which Should You Choose?
 
 Choose knotless if you have a sensitive scalp or want the most natural finish. Choose box braids for a timeless look with great longevity. Both start at competitive prices — call us at (614) 622-4624 to book!`,
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=1200&q=80",
+    image: "/images/gallery-knotless.jpg",
     category: "Hair Braiding",
     author: "Bibiche",
     publishedAt: "2026-01-15",
@@ -50,7 +50,7 @@ Our suites are ideal for hairstylists, braiders, lash artists, makeup artists, e
 ## How to Apply
 
 Call (614) 622-4624 or WhatsApp +1 (380) 265-5069 to schedule a tour with Bibiche. Suites are available now!`,
-    image: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1200&q=80",
+    image: "/images/suite-standard.jpg",
     category: "Salon Suites",
     author: "Bb Salon Team",
     publishedAt: "2026-02-20",
@@ -80,7 +80,7 @@ Protect your braids at night with a satin bonnet or scarf to reduce frizz and ex
 Most protective styles should be worn for 6-8 weeks maximum. Keeping braids too long can cause breakage and scalp issues.
 
 Book your next style at Bb Salon SUITES — services start at $100!`,
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&q=80",
+    image: "/images/gallery-braids-box.jpg",
     category: "Hair Care",
     author: "Bibiche",
     publishedAt: "2026-03-05",
@@ -115,7 +115,7 @@ Mention the "$20 OFF" promotion when booking your appointment. Call (614) 622-46
 2177 E. Livingston Ave, Columbus, OH 43209 — only 7 minutes from downtown. Free parking available.
 
 We can't wait to see you!`,
-    image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80",
+    image: "/images/gallery-boho-braids.jpg",
     category: "Promotions",
     author: "Bb Salon Team",
     publishedAt: "2026-03-25",

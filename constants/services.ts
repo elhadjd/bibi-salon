@@ -6,6 +6,7 @@ const locsImage = "/images/gallery-locs.jpg";
 const cornrowsImage = "/images/gallery-cornrows.jpg";
 const wavesImage = "/images/gallery-waves.jpg";
 const glamImage = "/images/gallery-glam-makeup.jpg";
+const bohoImage = "/images/gallery-boho-braids.jpg";
 
 export const services: Service[] = [
   {
@@ -43,7 +44,7 @@ export const services: Service[] = [
       "Boho braids combine structured braiding with loose, curly ends for a relaxed bohemian vibe. Ideal for vacations, events, or everyday glam with a natural feel.",
     duration: "5–9 hours",
     startingPrice: 180,
-    image: braidImage,
+    image: bohoImage,
     featured: true,
     benefits: ["Curly boho ends", "Event-ready style", "Custom curl pattern"],
   },

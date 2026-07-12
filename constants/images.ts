@@ -1,17 +1,17 @@
 export const brandImages = {
   logo: "/images/logo.png",
   logoAlt: "Bb Salon SUITES — Hair & Braiding logo",
-  banner: "/images/banner.svg",
-  bannerAlt: "Bb Salon SUITES promotional banner — Your Beauty, Our Passion",
+  banner: "/images/banner.jpg",
+  bannerAlt: "Bb Salon SUITES — African hair braiding and salon suites in Columbus, OH",
   heroPortrait: "/images/hero-portrait.jpg",
-  heroPortraitAlt: "Professional hair styling and makeup at Bb Salon SUITES",
+  heroPortraitAlt: "Professional hair styling at Bb Salon SUITES — Columbus braiding salon",
 } as const;
 
 export const galleryBrandImages = [
   {
     id: "g1",
     src: "/images/gallery-braids-box.jpg",
-    alt: "Box braids with gold cuffs at Bb Salon SUITES",
+    alt: "Box braids with gold cuffs at Bb Salon SUITES Columbus",
     category: "braids" as const,
     width: 800,
     height: 1000,
@@ -27,7 +27,7 @@ export const galleryBrandImages = [
   {
     id: "g3",
     src: "/images/gallery-cornrows.jpg",
-    alt: "Elegant cornrow updo hairstyle",
+    alt: "Elegant cornrow updo hairstyle at Bb Salon SUITES",
     category: "braids" as const,
     width: 800,
     height: 900,
@@ -35,7 +35,7 @@ export const galleryBrandImages = [
   {
     id: "g4",
     src: "/images/gallery-waves.jpg",
-    alt: "Long glossy waves and professional makeup",
+    alt: "Long silky waves and extensions at Bb Salon SUITES",
     category: "extensions" as const,
     width: 800,
     height: 1000,
@@ -43,7 +43,7 @@ export const galleryBrandImages = [
   {
     id: "g5",
     src: "/images/gallery-knotless.jpg",
-    alt: "Knotless braids with laid edges",
+    alt: "Knotless braids with laid edges at Bb Salon SUITES",
     category: "braids" as const,
     width: 800,
     height: 1000,
@@ -51,9 +51,47 @@ export const galleryBrandImages = [
   {
     id: "g6",
     src: "/images/gallery-locs.jpg",
-    alt: "Faux locs protective style",
+    alt: "Goddess faux locs protective style at Bb Salon SUITES",
     category: "locs" as const,
     width: 800,
     height: 1000,
   },
-];
+  {
+    id: "g7",
+    src: "/images/gallery-boho-braids.jpg",
+    alt: "Boho braids with curly ends at Bb Salon SUITES",
+    category: "braids" as const,
+    width: 800,
+    height: 1000,
+  },
+  {
+    id: "g8",
+    src: "/images/suite-standard.jpg",
+    alt: "Private salon suite with pink walls and gold styling chair",
+    category: "suites" as const,
+    width: 800,
+    height: 600,
+  },
+  {
+    id: "g9",
+    src: "/images/suite-window.jpg",
+    alt: "Salon suite with LED mirror and modern lighting",
+    category: "suites" as const,
+    width: 800,
+    height: 600,
+  },
+  {
+    id: "g10",
+    src: "/images/suite-premium.jpg",
+    alt: "Premium salon suite interior at Bb Salon SUITES",
+    category: "suites" as const,
+    width: 800,
+    height: 600,
+  },
+] as const;
+
+export const suiteImages = {
+  standard: "/images/suite-standard.jpg",
+  window: "/images/suite-window.jpg",
+  premium: "/images/suite-premium.jpg",
+} as const;

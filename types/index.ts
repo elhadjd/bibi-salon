@@ -55,6 +55,7 @@ export type GalleryCategory =
   | "extensions"
   | "lashes"
   | "makeup"
+  | "suites"
   | "before-after";
 
 export interface BlogPost {

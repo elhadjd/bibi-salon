@@ -1,4 +1,5 @@
 import { SalonSuite, FAQItem } from "@/types";
+import { suiteImages } from "@/constants/images";
 
 export const salonSuites: SalonSuite[] = [
   {
@@ -9,7 +10,7 @@ export const salonSuites: SalonSuite[] = [
     pricePeriod: "week",
     available: true,
     amenities: ["Large window", "Shampoo sink", "Air conditioning", "Free Wi-Fi"],
-    image: "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&q=80",
+    image: suiteImages.window,
   },
   {
     id: "suite-standard",
@@ -19,7 +20,7 @@ export const salonSuites: SalonSuite[] = [
     pricePeriod: "week",
     available: true,
     amenities: ["Shampoo sink", "Air conditioning", "Free Wi-Fi", "Storage space"],
-    image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",
+    image: suiteImages.standard,
   },
   {
     id: "suite-premium",
@@ -29,7 +30,7 @@ export const salonSuites: SalonSuite[] = [
     pricePeriod: "week",
     available: true,
     amenities: ["Window available", "Shampoo sink", "AC & heating", "All materials included"],
-    image: "https://images.unsplash.com/photo-1633681926022-84c23e8cb29d?w=800&q=80",
+    image: suiteImages.premium,
   },
 ];
 
