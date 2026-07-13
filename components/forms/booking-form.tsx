@@ -86,10 +86,10 @@ export function BookingForm() {
     return (
       <div className="rounded-2xl border border-border/50 bg-white p-8 text-center shadow-sm sm:p-12">
         <CheckCircle className="mx-auto h-14 w-14 text-secondary sm:h-16 sm:w-16" />
-        <h3 className="mt-6 text-xl font-medium text-primary sm:text-2xl">Appointment Request Received!</h3>
+        <h3 className="mt-6 text-xl font-medium text-primary sm:text-2xl">Appointment Confirmed!</h3>
         <p className="mt-3 text-sm text-muted sm:text-base">
-          Thank you for booking with Bb Salon SUITES. We&apos;ll confirm your appointment
-          within 2 hours via email and text message.
+          Your appointment at Bb Salon SUITES is confirmed. We&apos;ll see you at your scheduled
+          date and time. A confirmation will be sent to your email and phone.
         </p>
       </div>
     );
@@ -217,11 +217,11 @@ export function BookingForm() {
       </div>
 
       <Button type="submit" variant="secondary" size="lg" className="mt-6 h-14 w-full text-base sm:mt-8" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Request Appointment"}
+        {isSubmitting ? "Submitting..." : "Book Appointment"}
       </Button>
 
       <p className="mt-4 text-center text-xs text-muted">
-        We&apos;ll confirm within 2 hours. New clients: mention $20 OFF!
+        Your appointment is confirmed as soon as you book. New clients: mention $20 OFF!
       </p>
     </form>
   );
