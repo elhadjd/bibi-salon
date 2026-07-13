@@ -29,7 +29,7 @@ export default function BookPage() {
       <PageHero
         eyebrow="Reservations"
         title="Book Your Appointment"
-        description="Choose your service, date, and time. We'll confirm within 2 hours. No need to pick a stylist — we'll match you with the best available braider."
+        description="Choose your service, date, and time. Your appointment is confirmed instantly when you book. No need to pick a stylist — we'll match you with the best available braider."
       />
 
       <section className="section-padding">
