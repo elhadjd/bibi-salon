@@ -5,11 +5,12 @@ export function getFormErrorMessage(error: unknown, fallback: string): string {
   return fallback;
 }
 
-export async function parseApiResponse(response: Response): Promise<{
+export async function parseApiResponse<T = Record<string, unknown>>(response: Response): Promise<{
   ok: boolean;
   message?: string;
+  data?: T;
 }> {
-  const data = (await response.json().catch(() => ({}))) as {
+  const data = (await response.json().catch(() => ({}))) as T & {
     success?: boolean;
     message?: string;
     error?: string;
@@ -18,5 +19,6 @@ export async function parseApiResponse(response: Response): Promise<{
   return {
     ok: response.ok && data.success === true,
     message: data.message || data.error,
+    data,
   };
 }

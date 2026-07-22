@@ -6,7 +6,6 @@ const locsImage = "/images/gallery-locs.jpg";
 const cornrowsImage = "/images/gallery-cornrows.jpg";
 const wavesImage = "/images/gallery-waves.jpg";
 const glamImage = "/images/gallery-glam-makeup.jpg";
-const bohoImage = "/images/gallery-boho-braids.jpg";
 
 export const services: Service[] = [
   {
@@ -17,7 +16,6 @@ export const services: Service[] = [
     longDescription:
       "Our signature knotless braids reduce tension on the scalp while delivering a seamless, natural look. Perfect for protective styling with less discomfort and beautiful results that last weeks.",
     duration: "4–8 hours",
-    startingPrice: 150,
     image: knotlessImage,
     featured: true,
     benefits: ["Scalp-friendly technique", "Natural finish", "Long-lasting style"],
@@ -30,7 +28,6 @@ export const services: Service[] = [
     longDescription:
       "Box braids remain one of the most versatile protective styles. Our artists create clean parts and uniform braids customized to your preferred length, thickness, and color.",
     duration: "4–8 hours",
-    startingPrice: 120,
     image: braidImage,
     featured: true,
     benefits: ["Custom length & size", "Premium hair included", "Scalp care"],
@@ -43,8 +40,7 @@ export const services: Service[] = [
     longDescription:
       "Boho braids combine structured braiding with loose, curly ends for a relaxed bohemian vibe. Ideal for vacations, events, or everyday glam with a natural feel.",
     duration: "5–9 hours",
-    startingPrice: 180,
-    image: bohoImage,
+    image: braidImage,
     featured: true,
     benefits: ["Curly boho ends", "Event-ready style", "Custom curl pattern"],
   },
@@ -56,7 +52,6 @@ export const services: Service[] = [
     longDescription:
       "From classic straight-backs to elaborate tribal and feed-in patterns, our braiders create precise cornrows that protect your hair while showcasing artistry and culture.",
     duration: "1–4 hours",
-    startingPrice: 100,
     image: cornrowsImage,
     featured: true,
     benefits: ["Creative patterns", "Feed-in technique", "Quick install options"],
@@ -69,7 +64,6 @@ export const services: Service[] = [
     longDescription:
       "Get the loc look instantly with our faux loc installations. Available in goddess locs, soft locs, and butterfly locs — lightweight, versatile, and stunning.",
     duration: "5–10 hours",
-    startingPrice: 160,
     image: locsImage,
     featured: true,
     benefits: ["No commitment", "Goddess & soft loc options", "Lightweight feel"],
@@ -82,10 +76,21 @@ export const services: Service[] = [
     longDescription:
       "Twists offer a softer alternative to braids with beautiful movement and texture. Choose from Senegalese, passion, or spring twists for a look that suits your style.",
     duration: "3–7 hours",
-    startingPrice: 130,
     image: knotlessImage,
     featured: true,
     benefits: ["Multiple twist types", "Natural movement", "Low maintenance"],
+  },
+  {
+    slug: "micro-braids",
+    name: "Micro Braids",
+    category: "Braids",
+    description: "Fine, detailed micro braids for a sleek, long-lasting protective style.",
+    longDescription:
+      "Micro braids are small, precise braids that create a polished, versatile look. Our artists take care with every section for a neat finish that lasts and styles beautifully.",
+    duration: "6–12 hours",
+    image: braidImage,
+    featured: true,
+    benefits: ["Detailed finish", "Long-lasting style", "Versatile styling options"],
   },
   {
     slug: "hair-extensions",
@@ -95,7 +100,6 @@ export const services: Service[] = [
     longDescription:
       "Transform your look with high-quality human hair extensions. We offer various methods and textures to match your natural hair for seamless, beautiful results.",
     duration: "2–5 hours",
-    startingPrice: 150,
     image: wavesImage,
     featured: true,
     benefits: ["Color matching", "Premium hair", "Multiple methods"],
@@ -108,7 +112,6 @@ export const services: Service[] = [
     longDescription:
       "Our sew-in specialists create flawless installations with proper braiding foundation and invisible weft placement. Leave with full, flowing hair that looks and feels natural.",
     duration: "3–6 hours",
-    startingPrice: 140,
     image: wavesImage,
     featured: true,
     benefits: ["Secure installation", "Natural blend", "Versatile styling"],
@@ -121,7 +124,6 @@ export const services: Service[] = [
     longDescription:
       "Complete your install with a perfectly blended closure or frontal. We customize the hairline, bleach knots, and style for an undetectable, salon-quality finish.",
     duration: "2–4 hours",
-    startingPrice: 100,
     image: wavesImage,
     featured: false,
     benefits: ["Natural hairline", "Custom parting", "Bleached knots"],
@@ -134,7 +136,6 @@ export const services: Service[] = [
     longDescription:
       "Frame your face with beautifully shaped brows. Our artists sculpt, wax, and style your eyebrows to complement your features for a polished, defined look.",
     duration: "20–45 min",
-    startingPrice: 100,
     image: glamImage,
     featured: true,
     benefits: ["Custom shaping", "Wax & tweeze", "Brow styling"],
@@ -147,20 +148,18 @@ export const services: Service[] = [
     longDescription:
       "Wake up gorgeous with our lash services. From classic to volume extensions and lash lifts, every set is customized to enhance your natural eye shape.",
     duration: "1.5–3 hours",
-    startingPrice: 100,
     image: glamImage,
     featured: true,
     benefits: ["Custom lash mapping", "Volume & classic sets", "Aftercare guidance"],
   },
   {
     slug: "makeup",
-    name: "Makeup",
+    name: "Makeup & More",
     category: "Beauty",
     description: "Professional makeup for events, photoshoots, and everyday glam.",
     longDescription:
       "Look your absolute best for any occasion. Our makeup artists create flawless looks from soft glam to full beat — perfect for weddings, parties, and special events.",
     duration: "45–90 min",
-    startingPrice: 100,
     image: glamImage,
     featured: true,
     benefits: ["Event-ready looks", "Long-lasting products", "Skin-tone matching"],

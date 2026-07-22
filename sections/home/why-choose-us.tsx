@@ -12,9 +12,9 @@ const reasons = [
   },
   {
     icon: Sparkles,
-    title: "Affordable Pricing",
+    title: "Personalized Quotes",
     description:
-      `Services start at just $${siteConfig.servicesStartAt}. New clients get ${siteConfig.promotion}!`,
+      `Every style is unique. Call ${siteConfig.phone} for pricing tailored to your hair and service.`,
   },
   {
     icon: Heart,

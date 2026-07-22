@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, DollarSign, Check, ArrowRight } from "lucide-react";
+import { Clock, Phone, Check, ArrowRight } from "lucide-react";
 import { FadeIn } from "@/animations/motion";
 import { Breadcrumbs } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import { CTASection } from "@/sections/shared/cta-section";
 import { BreadcrumbSchema } from "@/components/seo/schema";
 import { generateSEO } from "@/lib/seo";
 import { services, getServiceBySlug } from "@/constants/services";
-import { formatPrice } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ServicePageProps) {
 
   return generateSEO({
     title: `${service.name} Columbus OH`,
-    description: `${service.description} Book ${service.name.toLowerCase()} at Bb Salon SUITES in Columbus, Ohio. Starting at $${service.startingPrice}. Open daily 8AM-9:30PM.`,
+    description: `${service.description} Book ${service.name.toLowerCase()} at Bb Salon SUITES in Columbus, Ohio. Call ${siteConfig.phone} for pricing. Open daily 8AM-9:30PM.`,
     path: `/services/${service.slug}`,
     image: service.image,
     keywords: `${service.name} Columbus Ohio, ${service.name} near me, African hair braiding Columbus, Black hair salon Columbus OH`,
@@ -89,10 +89,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   <Clock className="h-5 w-5 text-secondary" />
                   <span>{service.duration}</span>
                 </div>
-                <div className="flex items-center gap-2 text-muted">
-                  <DollarSign className="h-5 w-5 text-secondary" />
-                  <span>Starting at {formatPrice(service.startingPrice)}</span>
-                </div>
+                <a
+                  href={`tel:${siteConfig.phoneRaw}`}
+                  className="flex items-center gap-2 text-secondary hover:underline"
+                >
+                  <Phone className="h-5 w-5" />
+                  <span>Call {siteConfig.phone} for pricing</span>
+                </a>
               </div>
 
               <div className="mt-8 space-y-4 text-muted leading-relaxed">
@@ -138,9 +141,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       {related.name}
                     </h3>
                     <p className="mt-2 text-sm text-muted line-clamp-2">{related.description}</p>
-                    <p className="mt-3 text-sm font-medium text-secondary">
-                      From {formatPrice(related.startingPrice)}
-                    </p>
+                    <p className="mt-3 text-sm font-medium text-secondary">Call for pricing</p>
                   </Link>
                 ))}
               </div>

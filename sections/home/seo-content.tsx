@@ -29,7 +29,7 @@ export function SEOContentSection() {
               <p>
                 Searching for <em>&ldquo;hair braiding near me&rdquo;</em> or{" "}
                 <em>&ldquo;box braids Columbus Ohio&rdquo;</em>? Our expert braiders deliver flawless
-                protective styles starting at ${siteConfig.servicesStartAt}. We&apos;re open daily{" "}
+                protective styles tailored to your look. Call {siteConfig.phone} for pricing. We&apos;re open daily{" "}
                 {siteConfig.hoursSummary.toLowerCase()} — including Sundays — making us one of the
                 most accessible braiding salons in Columbus.
               </p>

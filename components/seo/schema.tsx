@@ -75,12 +75,6 @@ export function LocalBusinessSchema() {
           provider: { "@id": `${siteConfig.url}/#salon` },
           areaServed: "Columbus, Ohio",
         },
-        priceSpecification: {
-          "@type": "PriceSpecification",
-          price: service.startingPrice,
-          priceCurrency: "USD",
-          minPrice: service.startingPrice,
-        },
       })),
     },
   };

@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Your Beauty, Our Passion",
   subtitle: "Hair & Braiding",
   description:
-    "Bb Salon SUITES offers expert hair braiding, lashes, eyebrows, makeup, and luxury salon suites for rent in Columbus, Ohio. Open daily 8AM–9:30PM. Services from $100. Suites $150/week.",
+    "Bb Salon SUITES offers expert hair braiding, lashes, eyebrows, makeup, and luxury salon suites for rent in Columbus, Ohio. Open daily 8AM–9:30PM. Call for service pricing.",
   url: "https://bbsalonsuites.com",
   locale: "en_US",
   phone: "(614) 622-4624",
@@ -50,7 +50,6 @@ export const siteConfig = {
   parking:
     "Free parking available on-site at our Livingston Avenue location. Only 7 minutes from downtown Columbus.",
   suitePriceWeekly: 150,
-  servicesStartAt: 100,
 } as const;
 
 export const navigation = {
@@ -72,12 +71,13 @@ export const navigation = {
     { name: "Cornrows", href: "/services/cornrows", description: "Intricate braided patterns" },
     { name: "Faux Locs", href: "/services/faux-locs", description: "Loc-style without commitment" },
     { name: "Twists", href: "/services/twists", description: "Senegalese & passion twists" },
+    { name: "Micro Braids", href: "/services/micro-braids", description: "Fine detailed braids" },
     { name: "Hair Extensions", href: "/services/hair-extensions", description: "Length & volume" },
     { name: "Sew-Ins", href: "/services/sew-ins", description: "Secure weave installation" },
     { name: "Closures", href: "/services/closures", description: "Natural-looking closures" },
     { name: "Eyebrows", href: "/services/eyebrows", description: "Shaping & styling" },
     { name: "Lashes", href: "/services/lashes", description: "Extensions & lifts" },
-    { name: "Makeup", href: "/services/makeup", description: "Glam & everyday looks" },
+    { name: "Makeup & More", href: "/services/makeup", description: "Glam & everyday looks" },
   ],
   footer: [
     { name: "About Us", href: "/about" },
