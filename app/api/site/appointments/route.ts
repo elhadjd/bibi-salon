@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { submitAppointment, isSiteApiError, isSiteApiConfigured } from "@/lib/api/site-client";
 import { to24HourTime } from "@/lib/format-time";
+import { siteConfig } from "@/config/site";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -26,11 +27,21 @@ export async function POST(request: NextRequest) {
       notes,
       department_id,
       metadata,
+      amount,
+      success_url,
+      cancel_url,
     } = body;
 
     if (!firstName || !lastName || !email || !phone || !date || !time) {
       return NextResponse.json(
         { success: false, message: "All required booking fields must be provided." },
+        { status: 422 }
+      );
+    }
+
+    if (amount != null && (!success_url || !cancel_url)) {
+      return NextResponse.json(
+        { success: false, message: "success_url and cancel_url are required when amount is provided." },
         { status: 422 }
       );
     }
@@ -49,6 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     const pageUrl = request.headers.get("referer") ?? undefined;
+    const origin = request.nextUrl.origin;
 
     const result = await submitAppointment({
       first_name: firstName,
@@ -60,11 +72,21 @@ export async function POST(request: NextRequest) {
       service,
       notes,
       department_id,
+      ...(amount != null
+        ? {
+            amount: Number(amount),
+            success_url:
+              success_url ||
+              `${origin}/book/payment/return?status=success&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: cancel_url || `${origin}/book/payment/return?status=cancelled`,
+          }
+        : {}),
       metadata: {
         ...metadata,
         ...(pageUrl ? { page_url: pageUrl } : {}),
         source: "bb-salon-website",
         preferred_time_12h: time,
+        site_url: siteConfig.url,
       },
     });
 
