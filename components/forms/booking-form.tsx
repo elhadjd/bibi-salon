@@ -132,12 +132,9 @@ export function BookingForm() {
         return;
       }
 
-      if (data.payDeposit && payment?.status === "unavailable") {
+      if (data.payDeposit && !payment?.payment_url) {
         setIsSubmitted(true);
-        setSubmitNotice(
-          payment.message ||
-            "Your appointment is confirmed, but online deposit payment is not available right now. Please call us to pay your deposit."
-        );
+        setSubmitNotice(bookingConfig.depositUnavailableNotice);
         return;
       }
 
