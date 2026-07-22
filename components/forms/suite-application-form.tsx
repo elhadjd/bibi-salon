@@ -91,7 +91,10 @@ export function SuiteApplicationForm() {
         }),
       });
 
-      const result = await parseApiResponse(response);
+      const result = await parseApiResponse(
+        response,
+        "Unable to submit your application. Please try again."
+      );
       if (!result.ok) {
         setSubmitError(result.message || "Unable to submit your application. Please try again.");
         return;

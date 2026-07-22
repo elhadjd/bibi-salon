@@ -49,7 +49,10 @@ export function ContactForm() {
         }),
       });
 
-      const result = await parseApiResponse(response);
+      const result = await parseApiResponse(
+        response,
+        "Unable to send your message. Please try again."
+      );
       if (!result.ok) {
         setSubmitError(result.message || "Unable to send your message. Please try again.");
         return;

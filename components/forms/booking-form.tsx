@@ -112,7 +112,10 @@ export function BookingForm() {
         }),
       });
 
-      const result = await parseApiResponse<AppointmentApiResponse>(response);
+      const result = await parseApiResponse<AppointmentApiResponse>(
+        response,
+        "Unable to submit your appointment. Please try again."
+      );
       if (!result.ok) {
         setSubmitError(result.message || "Unable to submit your appointment. Please try again.");
         return;
