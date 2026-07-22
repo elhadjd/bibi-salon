@@ -1,10 +1,11 @@
-import { Clock, DollarSign, ArrowRight } from "lucide-react";
+import { Clock, Phone, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/animations/motion";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { formatPrice } from "@/lib/utils";
+import { bookingConfig } from "@/config/booking";
+import { siteConfig } from "@/config/site";
 import { Service } from "@/types";
 
 interface ServiceCardProps {
@@ -30,15 +31,18 @@ export function ServiceCard({ service }: ServiceCardProps) {
         </p>
         <h3 className="mt-1 text-xl font-medium text-primary">{service.name}</h3>
         <p className="mt-2 line-clamp-2 text-sm text-muted">{service.description}</p>
-        <div className="mt-4 flex items-center gap-4 text-sm text-muted">
+        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted">
           <span className="flex items-center gap-1">
             <Clock className="h-4 w-4 text-secondary" />
             {service.duration}
           </span>
-          <span className="flex items-center gap-1">
-            <DollarSign className="h-4 w-4 text-secondary" />
-            From {formatPrice(service.startingPrice)}
-          </span>
+          <a
+            href={`tel:${siteConfig.phoneRaw}`}
+            className="flex items-center gap-1 text-secondary hover:underline"
+          >
+            <Phone className="h-4 w-4" />
+            Call for pricing
+          </a>
         </div>
         <Button variant="ghost" className="mt-4 w-full group-hover:bg-primary group-hover:text-white" asChild>
           <Link href={`/services/${service.slug}`}>
@@ -64,7 +68,7 @@ export function FeaturedServicesSection({ services, showAll = false }: FeaturedS
           <SectionHeading
             eyebrow="Our Services"
             title="Signature Beauty Experiences"
-            description="From transformative color to precision cuts, every service is crafted with artistry and care."
+            description={`From braids and locs to lashes and makeup — every service is crafted with artistry and care. ${bookingConfig.pricingCta}.`}
           />
         </FadeIn>
 

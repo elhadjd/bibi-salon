@@ -52,8 +52,9 @@ export function HeroSection() {
             </p>
 
             <p className="mx-auto max-w-xl text-base leading-relaxed text-white/90 text-balance sm:text-lg lg:mx-0">
-              Expert African hair braiding, lashes, eyebrows &amp; makeup from ${siteConfig.servicesStartAt}.
+              Expert African hair braiding, lashes, eyebrows &amp; makeup in Columbus.
               Salon suites for rent at ${siteConfig.suitePriceWeekly}/week. {siteConfig.hoursSummary}.
+              Call {siteConfig.phone} for service pricing.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">

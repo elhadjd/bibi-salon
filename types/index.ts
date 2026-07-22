@@ -5,7 +5,6 @@ export interface Service {
   description: string;
   longDescription: string;
   duration: string;
-  startingPrice: number;
   image: string;
   featured?: boolean;
   benefits?: string[];
@@ -96,6 +95,7 @@ export interface BookingFormData {
   phone: string;
   email: string;
   notes?: string;
+  payDeposit?: boolean;
 }
 
 export interface SuiteApplicationData {

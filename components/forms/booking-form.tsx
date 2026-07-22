@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
-import { Calendar, CheckCircle } from "lucide-react";
+import { Calendar, CheckCircle, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,6 +17,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { services } from "@/constants/services";
+import { bookingConfig } from "@/config/booking";
+import { siteConfig } from "@/config/site";
 import { getFormErrorMessage, parseApiResponse } from "@/lib/api/form-errors";
 
 const bookingSchema = z.object({
@@ -28,6 +30,7 @@ const bookingSchema = z.object({
   phone: z.string().min(10, "Valid phone number required"),
   email: z.string().email("Valid email required"),
   notes: z.string().optional(),
+  payDeposit: z.boolean().optional(),
 });
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
@@ -46,6 +49,7 @@ function getServiceName(slug: string): string {
 
 export function BookingForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [depositPending, setDepositPending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
@@ -55,18 +59,28 @@ export function BookingForm() {
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
+    defaultValues: {
+      payDeposit: false,
+    },
   });
+
+  const payDeposit = watch("payDeposit");
 
   const onSubmit = async (data: BookingFormValues) => {
     setSubmitError(null);
 
     try {
+      const serviceName = getServiceName(data.service);
       const response = await fetch("/api/site/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
-          service: getServiceName(data.service),
+          service: serviceName,
+          metadata: {
+            pay_deposit: Boolean(data.payDeposit),
+            deposit_amount: data.payDeposit ? bookingConfig.depositAmount : undefined,
+          },
         }),
       });
 
@@ -76,8 +90,45 @@ export function BookingForm() {
         return;
       }
 
+      if (data.payDeposit) {
+        setDepositPending(true);
+
+        const paymentResponse = await fetch("/api/payments/deposit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            phone: data.phone,
+            date: data.date,
+            time: data.time,
+            service: serviceName,
+            appointmentId:
+              result.data && typeof result.data === "object"
+                ? (result.data as Record<string, unknown>).appointment_id
+                : undefined,
+          }),
+        });
+
+        const paymentResult = await parseApiResponse<{ checkoutUrl?: string }>(paymentResponse);
+        if (!paymentResult.ok || !paymentResult.data?.checkoutUrl) {
+          setDepositPending(false);
+          setIsSubmitted(true);
+          setSubmitError(
+            paymentResult.message ||
+              "Your appointment is confirmed, but we could not start the deposit payment online. Please call us to pay your deposit."
+          );
+          return;
+        }
+
+        window.location.href = paymentResult.data.checkoutUrl;
+        return;
+      }
+
       setIsSubmitted(true);
     } catch (error) {
+      setDepositPending(false);
       setSubmitError(getFormErrorMessage(error, "Unable to submit your appointment. Please try again."));
     }
   };
@@ -91,6 +142,11 @@ export function BookingForm() {
           Your appointment at Bb Salon SUITES is confirmed. We&apos;ll see you at your scheduled
           date and time. A confirmation will be sent to your email and phone.
         </p>
+        {submitError && (
+          <p className="mt-4 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-accent" role="alert">
+            {submitError}
+          </p>
+        )}
       </div>
     );
   }
@@ -108,11 +164,21 @@ export function BookingForm() {
         <h2 className="text-lg font-medium text-primary sm:text-xl">Book Your Appointment</h2>
       </div>
 
-      {submitError && (
+      {submitError && !isSubmitted && (
         <p className="mb-6 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-accent" role="alert">
           {submitError}
         </p>
       )}
+
+      <div className="mb-6 rounded-xl border border-secondary/20 bg-secondary/5 p-4 sm:p-5">
+        <div className="flex items-start gap-3">
+          <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
+          <div>
+            <p className="font-medium text-primary">Secure your spot with a ${bookingConfig.depositAmount} deposit</p>
+            <p className="mt-1 text-sm text-muted">{bookingConfig.depositDescription}</p>
+          </div>
+        </div>
+      </div>
 
       <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
         <div className="space-y-2 sm:col-span-2">
@@ -127,7 +193,7 @@ export function BookingForm() {
             <SelectContent>
               {services.map((service) => (
                 <SelectItem key={service.slug} value={service.slug}>
-                  {service.name} — from ${service.startingPrice}
+                  {service.name}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -214,14 +280,42 @@ export function BookingForm() {
             {...register("notes")}
           />
         </div>
+
+        <div className="sm:col-span-2">
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border/60 p-4">
+            <input
+              type="checkbox"
+              className="mt-1 h-4 w-4 rounded border-border text-secondary focus:ring-secondary"
+              {...register("payDeposit")}
+            />
+            <span>
+              <span className="block font-medium text-primary">
+                Pay ${bookingConfig.depositAmount} deposit now to secure my appointment
+              </span>
+              <span className="mt-1 block text-sm text-muted">
+                You&apos;ll be redirected to our secure payment page after booking. The deposit is applied to your service total.
+              </span>
+            </span>
+          </label>
+        </div>
       </div>
 
-      <Button type="submit" variant="secondary" size="lg" className="mt-6 h-14 w-full text-base sm:mt-8" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Book Appointment"}
+      <Button type="submit" variant="secondary" size="lg" className="mt-6 h-14 w-full text-base sm:mt-8" disabled={isSubmitting || depositPending}>
+        {depositPending
+          ? "Redirecting to payment..."
+          : isSubmitting
+            ? "Submitting..."
+            : payDeposit
+              ? `Book & Pay $${bookingConfig.depositAmount} Deposit`
+              : "Book Appointment"}
       </Button>
 
       <p className="mt-4 text-center text-xs text-muted">
-        Your appointment is confirmed as soon as you book. New clients: mention $20 OFF!
+        Your appointment is confirmed as soon as you book. For pricing, call{" "}
+        <a href={`tel:${siteConfig.phoneRaw}`} className="text-secondary hover:underline">
+          {siteConfig.phone}
+        </a>
+        .
       </p>
     </form>
   );

@@ -60,4 +60,4 @@ export const homePageTitle =
   "Bb Salon SUITES | Hair Braiding & Salon Suites Columbus OH";
 
 export const homePageDescription =
-  "Top-rated hair braiding salon in Columbus, Ohio. Box braids, knotless braids, faux locs, sew-ins, lashes & makeup from $100. Salon suites for rent $150/week. Open daily 8AM-9:30PM at 2177 E. Livingston Ave. Book now — $20 OFF first visit!";
+  "Top-rated hair braiding salon in Columbus, Ohio. Box braids, knotless braids, faux locs, sew-ins, lashes & makeup. Salon suites for rent $150/week. Open daily 8AM-9:30PM at 2177 E. Livingston Ave. Call for pricing or book online.";

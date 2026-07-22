@@ -9,7 +9,7 @@ import { Phone, Clock, MapPin, MessageCircle } from "lucide-react";
 export const metadata = generateSEO({
   title: "Book Hair Braiding Appointment Columbus OH",
   description:
-    "Book box braids, knotless braids, faux locs, lashes & makeup at Bb Salon SUITES Columbus OH. Services from $100. Open daily 8AM-9:30PM. New clients get $20 OFF!",
+    "Book box braids, knotless braids, faux locs, lashes & makeup at Bb Salon SUITES Columbus OH. Secure your spot with an optional $20 deposit. Open daily 8AM-9:30PM.",
   path: "/book",
   keywords:
     "book braids Columbus Ohio, hair braiding appointment near me, knotless braids booking Columbus, salon appointment Livingston Ave",
@@ -29,7 +29,7 @@ export default function BookPage() {
       <PageHero
         eyebrow="Reservations"
         title="Book Your Appointment"
-        description="Choose your service, date, and time. Your appointment is confirmed instantly when you book. No need to pick a stylist — we'll match you with the best available braider."
+        description="Choose your service, date, and time. Your appointment is confirmed instantly when you book. Optional $20 deposit to secure your spot. No need to pick a stylist — we'll match you with the best available braider."
       />
 
       <section className="section-padding">

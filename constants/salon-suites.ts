@@ -123,13 +123,13 @@ export const generalFAQs: FAQItem[] = [
   {
     question: "What services do you offer?",
     answer:
-      "We specialize in hair braiding (knotless, box, boho, cornrows), faux locs, twists, hair extensions, sew-ins, closures, eyebrows, lashes, and makeup. We do not offer men's haircuts.",
+      "We specialize in hair braiding (knotless, box, boho, micro, cornrows), faux locs, twists, hair extensions, sew-ins, closures, eyebrows, lashes, and makeup. We do not offer men's haircuts.",
     category: "general",
   },
   {
     question: "How much do services cost?",
     answer:
-      "Our services start at $100. Final pricing depends on hair length, style complexity, and add-ons. New clients may qualify for $20 off their first service — ask when booking!",
+      "Pricing depends on hair length, style complexity, and add-ons. Call (614) 622-4624 or message us on WhatsApp for a personalized quote.",
     category: "general",
   },
   {
@@ -157,9 +157,9 @@ export const generalFAQs: FAQItem[] = [
     category: "general",
   },
   {
-    question: "Is there a promotion for new clients?",
+    question: "How can I secure my appointment?",
     answer:
-      "Yes! New clients receive $20 OFF their first service. Mention this offer when booking your appointment.",
+      "When booking online, you can pay a $20 deposit to secure your spot. Because we are often fully booked, this helps reduce no-shows. The deposit is applied to your service total.",
     category: "general",
   },
 ];

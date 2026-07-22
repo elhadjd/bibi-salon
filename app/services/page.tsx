@@ -8,7 +8,7 @@ import { services } from "@/constants/services";
 export const metadata = generateSEO({
   title: "Hair Braiding Services Columbus OH",
   description:
-    "Box braids, knotless braids, faux locs, cornrows, sew-ins, lashes & makeup at Bb Salon SUITES Columbus Ohio. African hair braiding salon on Livingston Ave. From $100.",
+    "Box braids, knotless braids, faux locs, cornrows, sew-ins, lashes & makeup at Bb Salon SUITES Columbus Ohio. African hair braiding salon on Livingston Ave. Call for pricing.",
   path: "/services",
   keywords: "hair braiding services Columbus Ohio, box braids Columbus, knotless braids near me, African hair salon Columbus",
 });
