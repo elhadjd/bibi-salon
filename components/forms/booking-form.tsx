@@ -19,7 +19,9 @@ import {
 import { services } from "@/constants/services";
 import { bookingConfig } from "@/config/booking";
 import { siteConfig } from "@/config/site";
+import { bookingAppointmentIdStorageKey } from "@/components/booking/payment-return-status";
 import { getFormErrorMessage, parseApiResponse } from "@/lib/api/form-errors";
+import type { AppointmentPaymentInfo, AppointmentSubmitResponse } from "@/lib/api/site-client";
 
 const bookingSchema = z.object({
   service: z.string().min(1, "Please select a service"),
@@ -34,6 +36,13 @@ const bookingSchema = z.object({
 });
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
+
+type AppointmentApiResponse = {
+  success?: boolean;
+  message?: string;
+  appointment?: AppointmentSubmitResponse;
+  payment?: AppointmentPaymentInfo;
+};
 
 const timeSlots = [
   "8:00 AM", "8:30 AM", "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM",
@@ -51,6 +60,7 @@ export function BookingForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [depositPending, setDepositPending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitNotice, setSubmitNotice] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -68,15 +78,33 @@ export function BookingForm() {
 
   const onSubmit = async (data: BookingFormValues) => {
     setSubmitError(null);
+    setSubmitNotice(null);
 
     try {
       const serviceName = getServiceName(data.service);
+      const origin = window.location.origin;
+      const successUrl = `${origin}/book/payment/return?status=success&session_id={CHECKOUT_SESSION_ID}`;
+      const cancelUrl = `${origin}/book/payment/return?status=cancelled`;
+
       const response = await fetch("/api/site/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...data,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          date: data.date,
+          time: data.time,
           service: serviceName,
+          notes: data.notes,
+          ...(data.payDeposit
+            ? {
+                amount: bookingConfig.depositAmount,
+                success_url: successUrl,
+                cancel_url: cancelUrl,
+              }
+            : {}),
           metadata: {
             pay_deposit: Boolean(data.payDeposit),
             deposit_amount: data.payDeposit ? bookingConfig.depositAmount : undefined,
@@ -84,45 +112,32 @@ export function BookingForm() {
         }),
       });
 
-      const result = await parseApiResponse(response);
+      const result = await parseApiResponse<AppointmentApiResponse>(response);
       if (!result.ok) {
         setSubmitError(result.message || "Unable to submit your appointment. Please try again.");
         return;
       }
 
-      if (data.payDeposit) {
+      const payment = result.data?.payment;
+      const appointment = result.data?.appointment;
+
+      if (payment?.payment_url) {
         setDepositPending(true);
 
-        const paymentResponse = await fetch("/api/payments/deposit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            phone: data.phone,
-            date: data.date,
-            time: data.time,
-            service: serviceName,
-            appointmentId:
-              result.data && typeof result.data === "object"
-                ? (result.data as Record<string, unknown>).appointment_id
-                : undefined,
-          }),
-        });
-
-        const paymentResult = await parseApiResponse<{ checkoutUrl?: string }>(paymentResponse);
-        if (!paymentResult.ok || !paymentResult.data?.checkoutUrl) {
-          setDepositPending(false);
-          setIsSubmitted(true);
-          setSubmitError(
-            paymentResult.message ||
-              "Your appointment is confirmed, but we could not start the deposit payment online. Please call us to pay your deposit."
-          );
-          return;
+        if (appointment?.id) {
+          sessionStorage.setItem(bookingAppointmentIdStorageKey, String(appointment.id));
         }
 
-        window.location.href = paymentResult.data.checkoutUrl;
+        window.location.href = payment.payment_url;
+        return;
+      }
+
+      if (data.payDeposit && payment?.status === "unavailable") {
+        setIsSubmitted(true);
+        setSubmitNotice(
+          payment.message ||
+            "Your appointment is confirmed, but online deposit payment is not available right now. Please call us to pay your deposit."
+        );
         return;
       }
 
@@ -142,6 +157,11 @@ export function BookingForm() {
           Your appointment at Bb Salon SUITES is confirmed. We&apos;ll see you at your scheduled
           date and time. A confirmation will be sent to your email and phone.
         </p>
+        {submitNotice && (
+          <p className="mt-4 rounded-lg border border-secondary/30 bg-secondary/5 px-4 py-3 text-sm text-muted" role="status">
+            {submitNotice}
+          </p>
+        )}
         {submitError && (
           <p className="mt-4 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-accent" role="alert">
             {submitError}
@@ -293,7 +313,7 @@ export function BookingForm() {
                 Pay ${bookingConfig.depositAmount} deposit now to secure my appointment
               </span>
               <span className="mt-1 block text-sm text-muted">
-                You&apos;ll be redirected to our secure payment page after booking. The deposit is applied to your service total.
+                You&apos;ll be redirected to Stripe Checkout after booking. The deposit is applied to your service total.
               </span>
             </span>
           </label>
@@ -302,7 +322,7 @@ export function BookingForm() {
 
       <Button type="submit" variant="secondary" size="lg" className="mt-6 h-14 w-full text-base sm:mt-8" disabled={isSubmitting || depositPending}>
         {depositPending
-          ? "Redirecting to payment..."
+          ? "Redirecting to Stripe..."
           : isSubmitting
             ? "Submitting..."
             : payDeposit

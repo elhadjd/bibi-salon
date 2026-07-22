@@ -30,7 +30,34 @@ export interface AppointmentPayload {
   service?: string | number;
   notes?: string;
   department_id?: number;
+  amount?: number;
+  success_url?: string;
+  cancel_url?: string;
   metadata?: Record<string, unknown>;
+}
+
+export interface AppointmentPaymentInfo {
+  required?: boolean;
+  status?: string;
+  amount?: number;
+  currency?: string;
+  payment_url?: string;
+  session_id?: string;
+  payment_id?: number;
+  message?: string;
+}
+
+export interface AppointmentSubmitResponse {
+  id?: number;
+  date?: string;
+  time?: string;
+  status?: string;
+  metadata?: Record<string, unknown>;
+}
+
+export interface ConfirmPaymentPayload {
+  appointment_id: number;
+  session_id: string;
 }
 
 export interface SiteApiSuccess<T = unknown> {
@@ -181,6 +208,10 @@ export function submitContact(payload: ContactPayload) {
 
 export function submitAppointment(payload: AppointmentPayload) {
   return siteApiRequest("/appointments/submit", payload as unknown as Record<string, unknown>);
+}
+
+export function confirmAppointmentPayment(payload: ConfirmPaymentPayload) {
+  return siteApiRequest("/appointments/confirm-payment", payload as unknown as Record<string, unknown>);
 }
 
 export function isSiteApiConfigured(): boolean {
