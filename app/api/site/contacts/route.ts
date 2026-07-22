@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { submitContact, isSiteApiError, isSiteApiConfigured } from "@/lib/api/site-client";
+import { sanitizeClientErrorMessage } from "@/lib/api/form-errors";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -44,7 +45,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (isSiteApiError(error)) {
       return NextResponse.json(
-        { success: false, message: error.message, errors: error.errors },
+        {
+          success: false,
+          message: sanitizeClientErrorMessage(
+            error.message,
+            "Unable to submit contact. Please try again."
+          ),
+          errors: error.errors,
+        },
         { status: error.status }
       );
     }

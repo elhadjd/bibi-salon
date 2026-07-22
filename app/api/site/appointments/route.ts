@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { submitAppointment, isSiteApiError, isSiteApiConfigured } from "@/lib/api/site-client";
+import { sanitizeClientErrorMessage } from "@/lib/api/form-errors";
 import { to24HourTime } from "@/lib/format-time";
 import { siteConfig } from "@/config/site";
 
@@ -94,7 +95,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (isSiteApiError(error)) {
       return NextResponse.json(
-        { success: false, message: error.message, errors: error.errors },
+        {
+          success: false,
+          message: sanitizeClientErrorMessage(
+            error.message,
+            "Unable to submit appointment. Please try again."
+          ),
+          errors: error.errors,
+        },
         { status: error.status }
       );
     }

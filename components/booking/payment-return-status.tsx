@@ -6,6 +6,7 @@ import { CheckCircle, Loader2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { bookingConfig } from "@/config/booking";
 import { siteConfig } from "@/config/site";
+import { sanitizeClientErrorMessage } from "@/lib/api/form-errors";
 
 const APPOINTMENT_ID_STORAGE_KEY = "bb_booking_appointment_id";
 
@@ -71,8 +72,10 @@ export function PaymentReturnStatus({ status, sessionId }: PaymentReturnStatusPr
 
         setConfirmState("error");
         setConfirmMessage(
-          data.message ||
+          sanitizeClientErrorMessage(
+            data.message,
             "We could not confirm your deposit online. Your appointment may still be booked — please call us."
+          )
         );
       } catch {
         if (!cancelled) {
