@@ -19,7 +19,7 @@ import {
 import { services } from "@/constants/services";
 import { bookingConfig } from "@/config/booking";
 import { siteConfig } from "@/config/site";
-import { bookingAppointmentIdStorageKey } from "@/components/booking/payment-return-status";
+import { savePendingAppointmentId } from "@/lib/booking-storage";
 import { getFormErrorMessage, parseApiResponse } from "@/lib/api/form-errors";
 import type { AppointmentPaymentInfo, AppointmentSubmitResponse } from "@/lib/api/site-client";
 
@@ -128,7 +128,7 @@ export function BookingForm() {
         setDepositPending(true);
 
         if (appointment?.id) {
-          sessionStorage.setItem(bookingAppointmentIdStorageKey, String(appointment.id));
+          savePendingAppointmentId(appointment.id);
         }
 
         window.location.href = payment.payment_url;
