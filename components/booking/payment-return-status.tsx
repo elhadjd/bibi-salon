@@ -7,13 +7,21 @@ import { Button } from "@/components/ui/button";
 import { bookingConfig } from "@/config/booking";
 import { siteConfig } from "@/config/site";
 import { sanitizeClientErrorMessage } from "@/lib/api/form-errors";
-
-const APPOINTMENT_ID_STORAGE_KEY = "bb_booking_appointment_id";
+import {
+  getPendingAppointmentId,
+  isDepositConfirmed,
+  markDepositConfirmed,
+} from "@/lib/booking-storage";
 
 interface PaymentReturnStatusProps {
   status?: string;
   sessionId?: string;
 }
+
+const depositConfirmedMessage = "Your deposit payment has been confirmed.";
+const depositAlreadyCompleteMessage =
+  "Your deposit payment is complete and your appointment spot is secured. We'll see you soon!";
+const depositVerifyFallbackMessage = `If you completed your deposit payment, your appointment is confirmed. If you need help, call ${siteConfig.phone}.`;
 
 export function PaymentReturnStatus({ status, sessionId }: PaymentReturnStatusProps) {
   const [confirmState, setConfirmState] = useState<"loading" | "success" | "error" | "idle">("idle");
@@ -29,21 +37,24 @@ export function PaymentReturnStatus({ status, sessionId }: PaymentReturnStatusPr
 
     if (!sessionId) {
       setConfirmState("error");
-      setConfirmMessage(
-        "We could not verify your deposit automatically. Your appointment may still be booked — please call us to confirm."
-      );
+      setConfirmMessage(depositVerifyFallbackMessage);
       return;
     }
 
-    const appointmentId = sessionStorage.getItem(APPOINTMENT_ID_STORAGE_KEY);
+    if (isDepositConfirmed(sessionId)) {
+      setConfirmState("success");
+      setConfirmMessage(depositAlreadyCompleteMessage);
+      return;
+    }
+
+    const appointmentId = getPendingAppointmentId();
     if (!appointmentId) {
-      setConfirmState("error");
-      setConfirmMessage(
-        "We could not verify your deposit automatically. Your appointment may still be booked — please call us to confirm."
-      );
+      setConfirmState("success");
+      setConfirmMessage(depositAlreadyCompleteMessage);
       return;
     }
 
+    const confirmedSessionId = sessionId;
     let cancelled = false;
 
     async function confirmPayment() {
@@ -55,7 +66,7 @@ export function PaymentReturnStatus({ status, sessionId }: PaymentReturnStatusPr
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             appointment_id: Number(appointmentId),
-            session_id: sessionId,
+            session_id: confirmedSessionId,
           }),
         });
 
@@ -64,9 +75,9 @@ export function PaymentReturnStatus({ status, sessionId }: PaymentReturnStatusPr
         if (cancelled) return;
 
         if (response.ok && data.success) {
-          sessionStorage.removeItem(APPOINTMENT_ID_STORAGE_KEY);
+          markDepositConfirmed(confirmedSessionId);
           setConfirmState("success");
-          setConfirmMessage(data.message || "Your deposit payment has been confirmed.");
+          setConfirmMessage(data.message || depositConfirmedMessage);
           return;
         }
 
@@ -133,4 +144,4 @@ export function PaymentReturnStatus({ status, sessionId }: PaymentReturnStatusPr
   );
 }
 
-export const bookingAppointmentIdStorageKey = APPOINTMENT_ID_STORAGE_KEY;
+export { bookingAppointmentIdStorageKey } from "@/lib/booking-storage";
